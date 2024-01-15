@@ -1,5 +1,14 @@
 #include "../../cub3d.h"
 
+void print_biarr(char **str)
+{
+	while(*str)
+	{
+		if(**str)
+			printf("str == %s\n", *str);
+		str++;
+	}
+}
 int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n)
 {
 	int	len;
@@ -39,9 +48,9 @@ char	*ft_strjoin_chetao(char **s1, char **s2)
 	while (s2[0][counter])
 		*s++ = s2[0][counter++];
 	*s = 0;
-	if(**s2)
+	if(*s2)
 	 	free(*s2);
-	// if (**s1)
-	//  	free(*s1);
+	if (*s1)
+	  	free(*s1);
 	return (s - l);
 }

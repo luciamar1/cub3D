@@ -19,7 +19,7 @@ int check_extension(char *document)
 //     return (1);
 // }
 
-char **create_document(char *extension)
+char *create_document(char *extension)
 {
     char    *line_document;
     char    *new_line;
@@ -35,14 +35,13 @@ char **create_document(char *extension)
         if(!new_line)
             break;
         line_document = ft_strjoin_chetao(&line_document, &new_line);
-    }  
-    printf("%s\n", line_document);
-    return (NULL); 
+    }
+    return (line_document); 
 }
 
 int parser(int argc, char **argv)
 {
-    char    **document;
+    char    *document;
     if(argc != 2)
         return(printf("incorrect number of arguments"), 0);
     if (!check_extension(argv[1]))
@@ -50,6 +49,7 @@ int parser(int argc, char **argv)
     document = create_document(argv[1]);
     if(!document)
         return(0);
+    //check_create_document();
     // if (!check_elements(document))
     //     return(0);
     return(1);
