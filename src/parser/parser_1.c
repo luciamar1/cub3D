@@ -25,6 +25,7 @@ int move_to_space(char **str)
     while(*(*str) == 32 || (*(*str) >= 9 && *(*str) <= 13))
     {
         ret = 1;
+        //printf("move %c\n", **str);
         (*str) ++;
     }
     return (ret);
@@ -51,20 +52,42 @@ int choose_rgb(t_rgb *colors, char *nums)
     }
     return(0);
 }
-
-
-t_rgb    check_colors(char   *str, int *err, char cf)
+int    check_rgb(char **nums, int *err, t_rgb *color)
 {
-    int     counter;
-    t_rgb   color;
-    char    **nums;
+    int counter;
 
     counter = 0;
-    color.r = 0;
-    color.g = 0;
-    color.b = 0;
+    while(*nums)
+    {
+        move_to_space(&(*nums));
+        if(isdigit_str(*nums))
+        {
+            counter ++;
+            if(counter > 3)
+                return((*err = -1), 0);
+            if(!choose_rgb(color, *nums))
+                return((*err = -1), 0);
+        }
+        else
+        {
+            *err += 1;
+            return (0);
+        }
+        nums ++;
+    }
+    return (0);
+}
+
+t_rgb    check_colors(char   *str, int *err, char cf, int *check)
+{
+    char    **nums;
+    char    **aux;
+    t_rgb   color;
+
+    color.g = (color.r = 0), (color.b = 0), 0;
+    nums = NULL;
+    aux = NULL;
     move_to_space(&str);
-    //printf("\nstr == %c\n cf == %c\n is space = %d\n", *str, cf, is_space(str[1]));
     if ((*str == cf && is_space(str[1])))
     {
         str ++;
@@ -72,22 +95,12 @@ t_rgb    check_colors(char   *str, int *err, char cf)
         nums = ft_split(str, ',');
         if(!nums)
             return((*err = -1), color);
-
-        while(*nums)
-        {
-            move_to_space(&(*nums));
-            if(isdigit_str(*nums))
-            {
-                counter ++;
-                if(counter > 3)
-                    return((*err = -1), color);
-                if(!choose_rgb(&color, *nums))
-                    return((*err = -1), color);
-            }
-            else
-                return(*err += 1, color);
-            nums ++;
-        }
+        aux = nums;
+        check_rgb(nums, err, &color);
+        free_biarr(aux);
+        if(*err == -1)
+            return(color);
+        *check = 1;
     }
     else 
         *err += 1;
@@ -95,17 +108,20 @@ t_rgb    check_colors(char   *str, int *err, char cf)
 }
 
 
-int  check_textures(char *str, int *err, char *orientacion)
+int  check_textures(char *str, int *err, char *orientation, int *check)
 {
     int fd;
 
     fd = 0;
     move_to_space(&str);
-    if (!ft_strncmp(str, orientacion, 2) && is_space(str[1]))
+    if (!ft_strncmp(str, orientation, 2) && is_space(str[2]))
     {
+        str += 2;
+        move_to_space(&str);
         fd = open(str, O_RDONLY);
         if (fd < 0)
             return((*err = -1), fd);
+        *check = 1;
     }
     else
         err ++;
@@ -135,6 +151,47 @@ char **create_document(char *extension)
     return (doc); 
 }
 
+void    try_colors(char   *str_doc, int *err_doc, char cf, t_rgb *doc_rgb)
+{
+    int     check;
+    t_rgb   rgb;
+
+    check = 0;
+    rgb = check_colors(str_doc, err_doc, cf, &check);
+    if (check)
+        *doc_rgb = rgb;
+
+}
+
+void    try_textures(char   *str_doc, int *err_doc, t_textures *doc_texture)
+{
+    int     check;
+    int     path_texture;
+
+    check = 0;
+    path_texture = check_textures(str_doc, err_doc, "NO", &check);
+    if (check)
+    {
+        doc_texture->no = path_texture;
+        return ;
+    }
+    path_texture = check_textures(str_doc, err_doc, "SO", &check);
+    if (check)
+    {
+        doc_texture->so = path_texture;
+        return ;
+    }
+    path_texture = check_textures(str_doc, err_doc, "WE", &check);
+    if (check)
+    {
+        doc_texture->we = path_texture;
+        return ;
+    }
+    path_texture = check_textures(str_doc, err_doc, "EA", &check);
+    if (check)
+        doc_texture->ea = path_texture;
+}
+
 t_doc check_create_document(char **str_doc, int *err)
 {
     t_doc   doc;
@@ -145,23 +202,13 @@ t_doc check_create_document(char **str_doc, int *err)
         err_doc = 0;
         if(ft_isascii(**str_doc))
         {
-            doc.colors.ceiling = check_colors(*str_doc, &err_doc, 'C');
+            try_colors(*str_doc, &err_doc, 'C', &(doc.colors.ceiling));
+            if (err_doc == -1)
+                return((*err = 1), doc);
+            try_colors(*str_doc, &err_doc, 'F', &(doc.colors.floor));
             if(err_doc == -1)
                 return((*err = 1), doc);
-            printf("   color ceiling == %d, %d , %d\n", doc.colors.ceiling.r, doc.colors.ceiling.g, doc.colors.ceiling.b);
-            doc.colors.floor = check_colors(*str_doc, &err_doc, 'F');
-            if(err_doc == -1)
-                return((*err = 1), doc);
-            doc.textures.ea = check_textures(*str_doc, &err_doc, "EA");
-            if(err_doc == -1)
-                return((*err = 1), doc);
-            doc.textures.no = check_textures(*str_doc, &err_doc, "NO");
-            if(err_doc == -1)
-                return((*err = 1), doc);
-            doc.textures.so = check_textures(*str_doc, &err_doc, "SO");
-            if(err_doc == -1)
-                return((*err = 1), doc);
-            doc.textures.we = check_textures(*str_doc, &err_doc, "WE");
+            try_textures(*str_doc, &err_doc, &(doc.textures));
             if(err_doc == -1)
                 return((*err = 1), doc);
             if (*err == 6)
@@ -186,6 +233,7 @@ int parser(int argc, char **argv)
     if(!strbi_doc)
         return(0);
     doc = check_create_document(strbi_doc, &err);
+    free_biarr(strbi_doc);
     print_doc(doc);
     if (err)
         return(0);

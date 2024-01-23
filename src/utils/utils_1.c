@@ -29,6 +29,22 @@ int	ft_atoi_chetao(const char *str, int *error)
 	return (0);
 }
 
+void	free_biarr(char **fr)
+{
+	int	counter;
+
+	if (fr)
+	{
+		counter = 0;
+		while (fr[counter])
+		{
+			free(fr[counter]);
+			counter++;
+		}
+		free(fr);
+	}
+}
+
 void print_biarr(char **str)
 {
 	while(*str)
