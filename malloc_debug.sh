@@ -10,5 +10,5 @@ make leaks
 for ((i = $1; i <= $2; i++)); do
 	echo $i
 	make malloc_debug when=$i
-	./minishell < $3 >> log 2>> logerr
+	./cub3D < $3 >> log 2>> logerr
 done
