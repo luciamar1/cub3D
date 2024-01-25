@@ -1,5 +1,12 @@
 #include "../../cub3d.h"
 
+void    print_error(char *message)
+{
+    while(*message)
+        write(2, message++, 1);
+}
+
+
 int	ft_atoi_chetao(const char *str, int *error)
 {
 	int				c;
