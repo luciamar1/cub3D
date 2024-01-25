@@ -3,7 +3,12 @@ NAME := cub3D
 
 # Archivos fuente principales
 SRCS := src/main/main.c \
-		src/parser/parser_1.c \
+		src/parser/check_colors.c \
+		src/parser/check_create_doc.c \
+		src/parser/check_map.c \
+		src/parser/parser_base.c \
+		src/parser/parser_utils.c \
+		src/parser/str_doc.c \
 		src/utils/utils_1.c \
 		
 
@@ -18,7 +23,7 @@ OBJS += libft/libft.a
 
 
 MLX		= minilibx_mms_20200219/minilibx-linux/Makefile.gen
-CFLAGS	= -Wall -Wextra -Werror -I cub3d.h -I libft -Imlx 
+CFLAGS	= -w -Wall -Wextra -Werror -I libft -Imlx 
 LDFLAGS	= -lmlx -framework OpenGL -framework AppKit
 
 RM = /bin/rm -rf

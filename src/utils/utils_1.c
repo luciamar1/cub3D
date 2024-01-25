@@ -109,6 +109,8 @@ void	print_doc(t_doc doc)
 	printf("   textures so == %d\n", doc.textures.so);
 	printf("   textures we == %d\n", doc.textures.we);
 	printf("   textures ea == %d\n", doc.textures.ea);
+	printf("\n\nMAP\n");
+	print_biarr(doc.map);
 }
 
 int	isdigit_str(char *str)
@@ -118,4 +120,40 @@ int	isdigit_str(char *str)
 	if(*str && !ft_isdigit(*str))
 		return(0);
 	return(1);
+}
+
+int	strlen_bi(char **str)
+{
+	int	counter;
+
+	counter = 0;
+	while(*str)
+	{
+		str++;
+		counter ++;
+	}
+	return(counter);
+};
+
+char **strdup_bi(char **str)
+{
+	char	**ret;
+	int		len_bi;
+	int		counter;
+
+	counter = 0;
+	len_bi = strlen_bi(str);
+	ret = malloc(sizeof(char *) *  (len_bi + 1));
+	if (!ret)
+		return(NULL);
+	while(len_bi)
+	{
+		ret[counter] = ft_strdup(str[counter]);
+		if(!ret[counter])
+			return(free_biarr(ret), NULL);
+		counter ++;
+		len_bi --;
+	}
+	ret[counter] = NULL;
+	return(ret);
 }
