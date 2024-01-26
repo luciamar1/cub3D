@@ -17,6 +17,8 @@ char **create_document(char *extension)
         if(!new_line)
             break;
         line_document = ft_strjoin_chetao(&line_document, &new_line);
+        if (!line_document)
+            return(free(new_line), NULL);
     }
     doc = ft_split(line_document, '\n');
     free(line_document);

@@ -58,13 +58,13 @@ t_doc check_create_document(char **str_doc, int *err)
         {
             colors += try_colors(*str_doc, &err_doc, &(doc.colors));
             if(err_doc == -1)
-                return((*err = 1), doc);
+                return(print_error("error in colors\n"), (*err = 1), doc);
             textures += try_textures(*str_doc, &err_doc, &(doc.textures));
             if(err_doc == -1)
-                return((*err = 1), doc);
+                return(print_error("error in textures\n"), (*err = 1), doc);
             is_comment(err, *str_doc);
             if (*err == 7)
-                return ((*err = 1), doc);
+                return (print_error("invalid content in doc\n"), (*err = 1), doc);
         }
         else
             return ((*err = 1), doc);

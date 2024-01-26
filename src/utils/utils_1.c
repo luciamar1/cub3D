@@ -99,7 +99,7 @@ char	*ft_strjoin_chetao(char **s1, char **s2)
 	counter = 0;
 	while (s2[0][counter])
 		*s++ = s2[0][counter++];
-	*s = 0;
+	*s = '\0';
 	if(*s2)
 	 	free(*s2);
 	if (*s1)

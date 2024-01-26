@@ -56,5 +56,6 @@ int	ft_atoi_chetao(const char *str, int *error);
 void	print_doc(t_doc doc);
 int	isdigit_str(char *str);
 char **strdup_bi(char **str);
+void    print_error(char *message);
 
 #endif
