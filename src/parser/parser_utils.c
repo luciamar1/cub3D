@@ -29,6 +29,6 @@ int is_comment(int *err, char *str)
 {
     if((str[0] == '/' && str['/']) || str[0] == '#')
         return(1);
-    *err ++;
+    (*err) ++;
     return(0);
 }

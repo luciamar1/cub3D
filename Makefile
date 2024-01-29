@@ -22,8 +22,7 @@ OBJS += libft/libft.a
 # LIB		= -L ./libft -lft -L ./mlx/minilibx-linux -lmlx -lXext -lX11 -lm #-lbsd
 
 
-MLX		= minilibx_mms_20200219/minilibx-linux/Makefile.gen
-CFLAGS	= -w -Wall -Wextra -Werror -I libft -Imlx 
+CFLAGS	= -Wall -Wextra -Werror -I libft -I mlx 
 LDFLAGS	= -lmlx -framework OpenGL -framework AppKit
 
 RM = /bin/rm -rf
@@ -43,7 +42,7 @@ objs/%.o: src/%.c | objs
 
 #enlazar objetos a OBJS
 $(NAME): $(OBJS)
-	cc $(OBJS) -o $(NAME)
+	cc $(LDFLAGS) $(OBJS) -o $(NAME)
 
 #regla de compilacion libft
 libft/libft.a: 
@@ -87,4 +86,4 @@ sanitize:: CFLAGS += -fsanitize=address -g3
 sanitize:: LDFLAGS += -fsanitize=address
 sanitize:: re_nolib
 
-.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia leaks
+.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize 

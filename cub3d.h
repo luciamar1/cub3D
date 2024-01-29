@@ -1,19 +1,38 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <mlx.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
 #include "libft.h"
+# define SIZE 32
+
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}				t_vector;
+
+typedef struct s_window {
+	void		*reference;
+	t_vector	size;
+}				t_window;
+
+typedef struct s_minilib
+{
+	void		*mlx_pointer;
+	t_window	*window;
+}				t_minilib;
 
 typedef struct s_textures
 {   
-    int no;
-    int so;
-    int we;
-    int ea;
+    void    *no;
+    void    *so;
+    void    *we;
+    void    *ea;
 } t_textures;
 
 typedef struct s_rgb
@@ -33,12 +52,13 @@ typedef struct s_doc
 {
     t_colors    colors;
     t_textures  textures;
+    t_minilib   program;
     char        **map;
 } t_doc;
 
 
 //parser
-int parser(int argc, char **argv);
+t_doc   parser(int argc, char **argv, int *err);
 t_doc check_create_document(char **str_doc, int *err);
 int    try_colors(char   *str_doc, int *err_doc, t_colors *doc_rgb);
 int check_map(char **map);

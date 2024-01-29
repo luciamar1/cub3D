@@ -20,7 +20,7 @@ int verif_characters(char **map)
             || map[prim][seg] == 'W')
             {
                 if (map[prim][seg] == ' ')
-                    map[prim][seg] == '0';
+                    map[prim][seg] = '0';
                 if (map[prim][seg] == 'N' || map[prim][seg] == 'S' \
                     || map[prim][seg] == 'E'|| map[prim][seg] == 'W')
                     person ++;

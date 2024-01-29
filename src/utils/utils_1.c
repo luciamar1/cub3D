@@ -112,10 +112,6 @@ void	print_doc(t_doc doc)
 	printf("\n\nDOC:\n\n");
 	printf("   color ceiling == %d, %d , %d\n", doc.colors.ceiling.r, doc.colors.ceiling.g, doc.colors.ceiling.b);
 	printf("   color floor == %d, %d , %d\n\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
-	printf("   textures no == %d\n", doc.textures.no);
-	printf("   textures so == %d\n", doc.textures.so);
-	printf("   textures we == %d\n", doc.textures.we);
-	printf("   textures ea == %d\n", doc.textures.ea);
 	printf("\n\nMAP\n");
 	print_biarr(doc.map);
 }

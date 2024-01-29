@@ -1,45 +1,48 @@
 #include "../../cub3d.h"
 
 
-int  check_textures(char *str, int *err, char *orientation, int *check)
+void    *check_textures(char *str, int *err, char *orientation, int *check, t_doc *doc)
 {
-    int fd;
+    void    *img;
+    int     size;
 
-    fd = 0;
+    size = SIZE;
+    img = 0;
+
     move_to_space(&str);
     if (!ft_strncmp(str, orientation, 2) && is_space(str[2]))
     {
         str += 2;
         move_to_space(&str);
-        fd = open(str, O_RDONLY);
-        if (fd < 0)
-            return((*err = -1), fd);
+        img = mlx_xpm_file_to_image(doc->program.mlx_pointer, str, &size, &size);
+        if (!img)
+            return((*err = -1), img);
         *check = 1;
     }
     else
         err ++;
-    return(fd);
+    return(img);
 }
 
 
-int    try_textures(char   *str_doc, int *err_doc, t_textures *doc_texture)
+int try_textures(char   *str_doc, int *err_doc, t_doc *doc)
 {
     int     check;
-    int     path_texture;
+    void    *path_texture;
 
     check = 0;
-    path_texture = check_textures(str_doc, err_doc, "NO", &check);
+    path_texture = check_textures(str_doc, err_doc, "NO", &check, doc);
     if (check)
-        return ((doc_texture->no = path_texture), 1);
-    path_texture = check_textures(str_doc, err_doc, "SO", &check);
+        return ((doc->textures.no = path_texture), 1);
+    path_texture = check_textures(str_doc, err_doc, "SO", &check, doc);
     if (check)
-        return ((doc_texture->so = path_texture), 1);
-    path_texture = check_textures(str_doc, err_doc, "WE", &check);
+        return ((doc->textures.so = path_texture), 1);
+    path_texture = check_textures(str_doc, err_doc, "WE", &check, doc);
     if (check)
-        return ((doc_texture->we = path_texture), 1);
-    path_texture = check_textures(str_doc, err_doc, "EA", &check);
+        return ((doc->textures.we = path_texture), 1);
+    path_texture = check_textures(str_doc, err_doc, "EA", &check, doc);
     if (check)
-        return((doc_texture->ea = path_texture), 1);
+        return((doc->textures.ea = path_texture), 1);
     return(0);
 }
 
@@ -59,11 +62,11 @@ t_doc check_create_document(char **str_doc, int *err)
             colors += try_colors(*str_doc, &err_doc, &(doc.colors));
             if(err_doc == -1)
                 return(print_error("error in colors\n"), (*err = 1), doc);
-            textures += try_textures(*str_doc, &err_doc, &(doc.textures));
+            textures += try_textures(*str_doc, &err_doc, &(doc));
             if(err_doc == -1)
                 return(print_error("error in textures\n"), (*err = 1), doc);
-            is_comment(err, *str_doc);
-            if (*err == 7)
+            is_comment(&err_doc, *str_doc);
+            if (err_doc == 7)
                 return (print_error("invalid content in doc\n"), (*err = 1), doc);
         }
         else
