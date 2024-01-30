@@ -1,6 +1,6 @@
 #include "../../cub3d.h"
 
-char **create_document(char *extension)
+char **read_document(char *extension)
 {
     char    *line_document;
     char    *new_line;
@@ -17,10 +17,11 @@ char **create_document(char *extension)
         if(!new_line)
             break;
         line_document = ft_strjoin_chetao(&line_document, &new_line);
-        if (!line_document)
-            return(free(new_line), NULL);
+        if (!line_document && new_line)
+            return(protect_free(new_line), NULL);
     }
     doc = ft_split(line_document, '\n');
-    free(line_document);
+    if(line_document)
+        protect_free(line_document);
     return (doc); 
 }

@@ -65,7 +65,7 @@ int check_map(char **map);
 int is_space(char character);
 int move_to_space(char **str);
 int is_comment(int *err, char *str);
-char **create_document(char *extension);
+char **read_document(char *extension);
 
 //utils
 void	free_biarr(char **fr);
@@ -77,5 +77,6 @@ void	print_doc(t_doc doc);
 int	isdigit_str(char *str);
 char **strdup_bi(char **str);
 void    print_error(char *message);
+void	protect_free(char *pointer);
 
 #endif

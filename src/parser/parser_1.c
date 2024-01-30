@@ -145,9 +145,11 @@ char **create_document(char *extension)
         if(!new_line)
             break;
         line_document = ft_strjoin_chetao(&line_document, &new_line);
+        if(!line_document)
+            return(NULL);
     }
     doc = ft_split(line_document, '\n');
-    free(line_document);
+    protect_free(line_document);
     return (doc); 
 }
 
@@ -233,7 +235,8 @@ int parser(int argc, char **argv)
     if(!strbi_doc)
         return(0);
     doc = check_create_document(strbi_doc, &err);
-    free_biarr(strbi_doc);
+    if(strbi_doc)
+        free_biarr(strbi_doc);
     print_doc(doc);
     if (err)
         return(0);

@@ -1,5 +1,15 @@
 #include "../../cub3d.h"
 
+void	protect_free(char *pointer)
+{
+	if(pointer)
+	{
+		free(pointer);
+		pointer = NULL;
+	}
+
+}
+
 void    print_error(char *message)
 {
     while(*message)
@@ -45,7 +55,7 @@ void	free_biarr(char **fr)
 		counter = 0;
 		while (fr[counter])
 		{
-			free(fr[counter]);
+			protect_free(fr[counter]);
 			counter++;
 		}
 		free(fr);
@@ -101,9 +111,9 @@ char	*ft_strjoin_chetao(char **s1, char **s2)
 		*s++ = s2[0][counter++];
 	*s = '\0';
 	if(*s2)
-	 	free(*s2);
+	 	protect_free(*s2);
 	if (*s1)
-	  	free(*s1);
+	  	protect_free(*s1);
 	return (s - l);
 }
 
