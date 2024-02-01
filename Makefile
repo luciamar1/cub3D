@@ -83,7 +83,7 @@ leaks: $(OBJS) objs/debug/malloc_debug.o
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3
-sanitize:: LDFLAGS += -fsanitize=address
+sanitize:: LDFLAGS += -fsanitize=address -g3
 sanitize:: re_nolib
 
 .PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize 

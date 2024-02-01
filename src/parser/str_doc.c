@@ -18,10 +18,10 @@ char **read_document(char *extension)
             break;
         line_document = ft_strjoin_chetao(&line_document, &new_line);
         if (!line_document && new_line)
-            return(protect_free(new_line), NULL);
+            return(free(new_line), NULL);
     }
     doc = ft_split(line_document, '\n');
     if(line_document)
-        protect_free(line_document);
+        free(line_document);
     return (doc); 
 }

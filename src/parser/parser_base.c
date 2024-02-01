@@ -21,17 +21,15 @@ t_doc   parser(int argc, char **argv, int *err_parser)
     if (!check_extension(argv[1]))
         return((*err_parser = 1), doc);
     strbi_doc = read_document(argv[1]);
+    //print_biarr(strbi_doc);
     if(!strbi_doc)
         return((*err_parser = 1), doc);
-    //print_biarr(strbi_doc);
-    //print_error("%s\n", *strbi_doc);
     doc = check_create_document(strbi_doc, &err);
-    if(strbi_doc)
-        free_biarr(strbi_doc);
+    free_biarr(strbi_doc);
     if (err)
-        return((*err_parser = 1), free_biarr(doc.map), doc);
-    //if(!check_map(doc.map))
-     //   return(free_biarr(doc.map), 0);
-    print_doc(doc);
+        return((*err_parser = 1)/*, free_biarr(doc.map)*/, doc);
+    else
+        free_biarr(doc.map);
+    //print_doc(doc);
     return((*err_parser = 0), doc);
 }

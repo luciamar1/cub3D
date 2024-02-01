@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	doc = parser(argc, argv, &err);
 	if(err)
 		return(1);
-	if(doc.map)
-		free_biarr(doc.map);
+	printf("mapa bueno\n");
+	//free_biarr(doc.map);
 	return(0);
 }

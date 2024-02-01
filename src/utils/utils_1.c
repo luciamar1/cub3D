@@ -1,15 +1,5 @@
 #include "../../cub3d.h"
 
-void	protect_free(char *pointer)
-{
-	if(pointer)
-	{
-		free(pointer);
-		pointer = NULL;
-	}
-
-}
-
 void    print_error(char *message)
 {
     while(*message)
@@ -55,7 +45,7 @@ void	free_biarr(char **fr)
 		counter = 0;
 		while (fr[counter])
 		{
-			protect_free(fr[counter]);
+			free(fr[counter]);
 			counter++;
 		}
 		free(fr);
@@ -111,9 +101,9 @@ char	*ft_strjoin_chetao(char **s1, char **s2)
 		*s++ = s2[0][counter++];
 	*s = '\0';
 	if(*s2)
-	 	protect_free(*s2);
+	 	free(*s2);
 	if (*s1)
-	  	protect_free(*s1);
+	  	free(*s1);
 	return (s - l);
 }
 
@@ -123,7 +113,7 @@ void	print_doc(t_doc doc)
 	printf("   color ceiling == %d, %d , %d\n", doc.colors.ceiling.r, doc.colors.ceiling.g, doc.colors.ceiling.b);
 	printf("   color floor == %d, %d , %d\n\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
 	printf("\n\nMAP\n");
-	print_biarr(doc.map);
+	//print_biarr(doc.map);
 }
 
 int	isdigit_str(char *str)
