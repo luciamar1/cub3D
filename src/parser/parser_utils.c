@@ -1,4 +1,4 @@
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 int is_space(char character)
 {
@@ -24,11 +24,3 @@ int move_to_space(char **str)
     return (ret);
 }
 
-
-int is_comment(int *err, char *str)
-{
-    if((str[0] == '/' && str['/']) || str[0] == '#')
-        return(1);
-    (*err) ++;
-    return(0);
-}

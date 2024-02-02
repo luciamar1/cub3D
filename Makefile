@@ -10,6 +10,7 @@ SRCS := src/main/main.c \
 		src/parser/parser_utils.c \
 		src/parser/str_doc.c \
 		src/utils/utils_1.c \
+		src/utils/utils_2.c \
 		
 
 # Archivos objeto
@@ -22,7 +23,7 @@ OBJS += libft/libft.a
 # LIB		= -L ./libft -lft -L ./mlx/minilibx-linux -lmlx -lXext -lX11 -lm #-lbsd
 
 
-CFLAGS	= -Wall -Wextra -Werror -I libft -I mlx 
+CFLAGS	= -Wall -Wextra -Werror -I libft -I src -I mlx 
 LDFLAGS	= -lmlx -framework OpenGL -framework AppKit
 
 RM = /bin/rm -rf

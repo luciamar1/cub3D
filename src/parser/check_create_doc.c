@@ -1,4 +1,4 @@
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 void    *check_textures(char   *str_doc, int *err_doc, t_doc *doc)
 {

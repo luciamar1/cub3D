@@ -1,4 +1,4 @@
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 int check_extension(char *document)
 {
@@ -25,7 +25,6 @@ t_doc   parser(int argc, char **argv, int *err_parser)
         return((*err_parser = 1), doc);
     doc = check_create_document(strbi_doc, &err);
     free_biarr(strbi_doc);
-    printf("err == %d\n", err);
     if (err)
         return((*err_parser = 1), doc);
     print_doc(doc);

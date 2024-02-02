@@ -64,15 +64,14 @@ int    try_colors(char   *str_doc, int *err_doc, t_colors *doc_rgb);
 int check_map(char **map);
 int is_space(char character);
 int move_to_space(char **str);
-int is_comment(int *err, char *str);
 char **read_document(char *extension);
 
 //utils
 void	free_biarr(char **fr);
 int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
-char	*ft_strjoin_chetao(char **s1, char **s2);
+char	*ft_strjoin_better(char **s1, char **s2);
 void print_biarr(char **str);
-int	ft_atoi_chetao(const char *str, int *error);
+int	ft_atoi_better(const char *str, int *error);
 void	print_doc(t_doc doc);
 int	isdigit_str(char *str);
 char **strdup_bi(char **str);

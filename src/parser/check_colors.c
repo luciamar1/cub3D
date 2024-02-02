@@ -1,4 +1,4 @@
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 
 int choose_rgb(t_rgb *colors, char *nums)
@@ -7,7 +7,7 @@ int choose_rgb(t_rgb *colors, char *nums)
     int err_atoi;
 
     err_atoi = 0;
-    num = ft_atoi_chetao(nums, &err_atoi);
+    num = ft_atoi_better(nums, &err_atoi);
     if(err_atoi)
         return(0);
     if(num >= 0 && num <= 255)
@@ -22,7 +22,7 @@ int choose_rgb(t_rgb *colors, char *nums)
     }
     return(0);
 }
-int    check_rgb(char **nums, int *err, t_rgb *color)
+int    check_rgb(char **nums, int *err, t_rgb *color, int *check)
 {
     int counter;
 
@@ -41,10 +41,12 @@ int    check_rgb(char **nums, int *err, t_rgb *color)
         else
         {
             *err += 1;
+            *check = 0;
             return (0);
         }
         nums ++;
     }
+    *check = 1;
     return (0);
 }
 
@@ -66,11 +68,10 @@ t_rgb    check_colors(char   *str, int *err, char cf, int *check)
         if(!nums)
             return((*err = -1), color);
         aux = nums;
-        check_rgb(nums, err, &color);
+        check_rgb(nums, err, &color, check);
         free_biarr(aux);
         if(*err == -1)
             return(color);
-        *check = 1;
     }
     else 
         *err += 1;

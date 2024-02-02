@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/25 17:34:34 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:47:32 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "minishell.h"
+#include "cub3d.h"
 #include "malloc_debug.h"
 
 static int	size_of_int(int n)
