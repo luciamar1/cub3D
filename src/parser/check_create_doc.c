@@ -50,6 +50,7 @@ void    create_map(char **str_doc, int *err, t_doc *doc)
     str_doc ++;
     doc->map = strdup_bi(str_doc);
     if(!doc->map)
+        print_error("malloc error\n");
         *err = 1;
     return ;
 }

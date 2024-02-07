@@ -20,7 +20,7 @@ char **read_document(char *extension)
         line_document = ft_strjoin_better(&line_document, &new_line);
         free(aux[0]);
         free(aux[1]);
-        if (!line_document && new_line)
+        if (!line_document)
             return(free(new_line), NULL);
     }
     doc = ft_split(line_document, '\n');

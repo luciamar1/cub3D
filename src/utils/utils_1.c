@@ -7,7 +7,7 @@ char	*ft_strjoin_better(char **s1, char **s2)
 	int		counter;
 
 	counter = 0;
-	if (!s2)
+	if (!s2 || *s2)
 		return (NULL);
 	if (*s1)
 		l = ft_strlen(*s1) + ft_strlen(*s2);
@@ -32,18 +32,6 @@ void	print_doc(t_doc doc)
 	printf("   color floor == %d, %d , %d\n\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
 	printf("\n\nMAP\n");
 	print_biarr(doc.map);
-}
-
-int	isdigit_str(char *str)
-{
-    while(*str) 
-	{
-		if (!ft_isdigit(*str))
-            return(0);
-        str++;
-    }
-    return(1);
-
 }
 
 int	strlen_bi(char **str)
@@ -80,4 +68,25 @@ char **strdup_bi(char **str)
 	}
 	ret[counter] = NULL;
 	return(ret);
+}
+
+int	isdigit_str(char *str)
+{
+	int counter;
+
+	counter = 0;
+    while(str[counter]) 
+	{
+		if (!ft_isdigit(str[counter]))
+		{	
+			if(is_space(str[counter]) && !str[counter + 1])
+			{
+				return(1);
+			}
+            return(0);
+		}
+        counter++;
+    }
+    return(1);
+
 }

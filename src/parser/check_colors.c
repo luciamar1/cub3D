@@ -37,6 +37,7 @@ int    check_rgb(char **nums, int *err, t_rgb *color, int *check)
                 return((*err = -1), 0);
             if(!choose_rgb(color, *nums))
                 return((*err = -1), 0);
+            move_to_space(&(*nums));
         }
         else
         {
@@ -66,7 +67,7 @@ t_rgb    check_colors(char   *str, int *err, char cf, int *check)
         move_to_space(&str);
         nums = ft_split(str, ',');
         if(!nums)
-            return((*err = -1), color);
+            return(print_error("malloc error\n"), (*err = -1), color);
         aux = nums;
         check_rgb(nums, err, &color, check);
         free_biarr(aux);
