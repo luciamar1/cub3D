@@ -7,6 +7,7 @@ SRCS := src/main/main.c \
 		src/parser/check_create_doc.c \
 		src/parser/check_map.c \
 		src/parser/parser_base.c \
+		src/parser/utils_parser.c \
 		src/parser/parser_utils.c \
 		src/parser/str_doc.c \
 		src/utils/utils_1.c \

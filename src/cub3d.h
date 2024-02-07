@@ -68,13 +68,15 @@ char **read_document(char *extension);
 
 //utils
 void	free_biarr(char **fr);
-int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin_better(char **s1, char **s2);
 void print_biarr(char **str);
-int	ft_atoi_better(const char *str, int *error);
-void	print_doc(t_doc doc);
 int	isdigit_str(char *str);
+void	print_doc(t_doc doc);
 char **strdup_bi(char **str);
 void    print_error(char *message);
+int	ft_atoi_better(const char *str, int *error);
+
+void    put_value_color(t_colors *colors, int value, char   type);
+int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
 
 #endif

@@ -63,12 +63,15 @@ t_doc check_create_document(char **str_doc, int *err)
     int     text;
     int     textures[4];
     
+
     doc.map = ((ft_bzero(textures, sizeof(int) * 4)), NULL);
     doc.program.mlx_pointer = ((colors = 0), (text = 0), mlx_init());
     if (!doc.program.mlx_pointer)
 		return (print_error("mlx_init fail\n"), (*err = 1), doc);
+    put_value_color(&doc.colors, -1, 't');
     while(*str_doc)
     {
+
         colors += ((err_doc = 0), try_colors(*str_doc, &err_doc, &(doc.colors)));
         if(err_doc == -1)
             return(print_error("error in colors\n"), (*err = 1), doc);

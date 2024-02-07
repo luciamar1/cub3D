@@ -40,7 +40,7 @@ int	isdigit_str(char *str)
 
 int main(void)
 {
-    if(isdigit_str("567   "))
+    if(isdigit_str("150   "))
         printf("atoi %d\n", ft_atoi("678  "));
     return(1);
 }

@@ -7,7 +7,7 @@ char	*ft_strjoin_better(char **s1, char **s2)
 	int		counter;
 
 	counter = 0;
-	if (!s2 || *s2)
+	if (!*s2 )
 		return (NULL);
 	if (*s1)
 		l = ft_strlen(*s1) + ft_strlen(*s2);
@@ -73,18 +73,23 @@ char **strdup_bi(char **str)
 int	isdigit_str(char *str)
 {
 	int counter;
+    int status;
 
+    status = 0,
 	counter = 0;
     while(str[counter]) 
 	{
-		if (!ft_isdigit(str[counter]))
+		while (!ft_isdigit(str[counter]))
 		{	
+            status = 1;
 			if(is_space(str[counter]) && !str[counter + 1])
 			{
 				return(1);
 			}
-            return(0);
+            counter ++;
 		}
+        if (status)
+            return(0);
         counter++;
     }
     return(1);

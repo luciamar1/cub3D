@@ -18,7 +18,6 @@ int move_to_space(char **str)
     while(*(*str) == 32 || (*(*str) >= 9 && *(*str) <= 13))
     {
         ret = 1;
-        //printf("move %c\n", **str);
         (*str) ++;
     }
     return (ret);
