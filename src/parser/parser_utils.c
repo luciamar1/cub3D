@@ -22,4 +22,3 @@ int move_to_space(char **str)
     }
     return (ret);
 }
-

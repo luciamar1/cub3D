@@ -60,7 +60,7 @@ typedef struct s_doc
 //parser
 t_doc   parser(int argc, char **argv, int *err);
 t_doc check_create_document(char **str_doc, int *err);
-int    try_colors(char   *str_doc, int *err_doc, t_colors *doc_rgb);
+int    try_colors(char   *str_doc, int *err_doc, t_doc *doc, int *colors);
 int check_map(char **map);
 int is_space(char character);
 int move_to_space(char **str);
@@ -75,6 +75,7 @@ void	print_doc(t_doc doc);
 char **strdup_bi(char **str);
 void    print_error(char *message);
 int	ft_atoi_better(const char *str, int *error);
+int	is_digit_space_str(char *str);
 
 void    put_value_color(t_colors *colors, int value, char   type);
 int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);

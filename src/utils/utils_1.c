@@ -70,28 +70,19 @@ char **strdup_bi(char **str)
 	return(ret);
 }
 
-int	isdigit_str(char *str)
+int	is_digit_space_str(char *str)
 {
 	int counter;
     int status;
 
     status = 0,
 	counter = 0;
-    while(str[counter]) 
+    while(str[counter] && (is_space(str[counter]) || ft_isdigit(str[counter]) || str[counter] == ',')) 
 	{
-		while (!ft_isdigit(str[counter]))
-		{	
-            status = 1;
-			if(is_space(str[counter]) && !str[counter + 1])
-			{
-				return(1);
-			}
-            counter ++;
-		}
-        if (status)
-            return(0);
-        counter++;
+		counter ++;
     }
+	if (str[counter])
+		return (0);
     return(1);
 
 }
