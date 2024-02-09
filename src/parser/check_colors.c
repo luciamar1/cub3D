@@ -120,41 +120,49 @@ int check_volume_nums(char *str)
             move_to_space(&str);
         if(*str == ',')
             str ++;
-        printf("counter == %d str == \n", counter);
-        if(*str)
+        if(*str && ft_isdigit(*str))
+        {
+            while(ft_isdigit(*str))
+                str ++;
             counter++;
-        str ++;
+
+        }
+        if(*str && str[1])
+            str ++;
     }
-    printf("\n");
     if(counter == 3)
         return (1);
     return(0);
 }
 
-int put_rgb(char **nums, t_rgb *doc_rgb)
+int put_rgb(char **nums, t_rgb *doc_rgb, int *color)
 {
     int counter;
     int rgb[3];
     int atoi_err;
 
     counter = 0;
+    atoi_err = 0;
     while(*nums)
     {
         move_to_space(nums);
         rgb[counter] = ft_atoi_better(*nums, &atoi_err);
-        if(atoi_err || (!atoi_err && (rgb[counter] < 0 || rgb[counter] > 255)))
+        printf("%d\n", atoi_err);
+        if(atoi_err)
             return(0);
-        printf("atoi == %d\n", rgb[counter]);
+        if(((rgb[counter] < 0 || rgb[counter] > 255)))
+            return(0);
         counter ++;
         nums ++;
     }
     doc_rgb->r = rgb[0];
     doc_rgb->g = rgb[1];
     doc_rgb->b = rgb[2];
+    color[0] = 1;
     return(1);
 }
 
-void   check_rgb(char *str, int *err_doc, t_rgb *doc_rgb)
+void   check_rgb(char *str, int *err_doc, t_rgb *doc_rgb, int *colors)
 {
     char **nums;
 
@@ -164,34 +172,44 @@ void   check_rgb(char *str, int *err_doc, t_rgb *doc_rgb)
         *err_doc = -1;
         return ;
     }
+    printf(" err = %d \n", *err_doc);
     if(!check_volume_nums(str))
     {
         *err_doc = -1;
         return ;
     }
-    printf("llega\n");
+    printf(" err = %d \n", *err_doc);
     nums = ft_split(str, ',');
     if(!nums)
     {
         *err_doc = -1;
         return ;
     }
-    if (!put_rgb(nums, doc_rgb))
+    printf(" err = %d \n", *err_doc);
+    if (!put_rgb(nums, doc_rgb, colors))
     {
         *err_doc = -1;
+        printf("RGB\n");
         return ;
     }
+    printf(" err = %d \n", *err_doc);
+    printf("\n\n");
 }
 
 int    try_colors(char   *str_doc, int *err_doc, t_doc *doc, int *colors)
 {
+
+    printf("ceeeee %s %d\n", str_doc, colors[0]);
     if(!ft_strncmp(str_doc + 1, "C ", 2) && colors[0] == -1)
-       return ((check_rgb(str_doc, err_doc, &doc->colors.ceiling)),(colors[0] = 1), 1);
+    {
+       return ((check_rgb(str_doc, err_doc, &doc->colors.ceiling, &colors[0])), 1);
+    }
     else
         *err_doc += 1;
     if(!ft_strncmp(str_doc, "F ", 2) && colors[1] == -1)
-       return ((check_rgb(str_doc + 1, err_doc, &doc->colors.floor)),(colors[1] = 1), 1);
+       return ((check_rgb(str_doc + 1, err_doc, &doc->colors.floor, &colors[1])), 1);
     else
             *err_doc += 1;
+    //printf("atoi == %d %d %d\n", doc->colors.floor.r, doc->colors.floor.g, doc->colors.floor.b);
     return (0);
 }

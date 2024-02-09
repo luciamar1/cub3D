@@ -73,13 +73,15 @@ t_doc check_create_document(char **str_doc, int *err)
     //put_value_color(&doc.colors, -1, 't');
     while(*str_doc)
     {
-
         colors += ((err_doc = 0), try_colors(*str_doc, &err_doc, &(doc), col));
+        printf("create document == %s err = %d\n", *str_doc, err_doc);
         if(err_doc == -1)
             return(print_error("error in colors\n"), (*err = 1), doc);
+        //printf("atoi == %d %d %d\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
         text += try_textures(*str_doc, &err_doc, &(doc), textures);
         if(err_doc == -1)
             return(print_error("error in textures\n"), (*err = 1), doc);
+        printf("0 = %d str = %s\n", err_doc, *str_doc);
         if (err_doc == 6)
             return (print_error("invalid content in doc\n"), (*err = 1), doc);
         if(colors == 2 && text == 4)
