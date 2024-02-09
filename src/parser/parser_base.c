@@ -25,9 +25,9 @@ t_doc   parser(int argc, char **argv, int *err_parser)
     if(!strbi_doc)
         return((print_error("doc cant be read\n")), (*err_parser = 1), doc);
     doc = check_create_document(strbi_doc, &err);
-    print_doc(doc);
     free_biarr(strbi_doc);
     if (err)
         return((*err_parser = 1), doc);
+    print_doc(doc);
     return((*err_parser = 0), doc);
 }

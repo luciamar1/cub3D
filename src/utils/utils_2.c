@@ -6,34 +6,31 @@ void    print_error(char *message)
         write(2, message++, 1);
 }
 
-
 int	ft_atoi_better(const char *str, int *error)
 {
-	int				c;
-	unsigned int	x;
+	int				minus;
+	long int		ret;
+	int				counter;
 
-	c = 1;
-	x = 0;
-	while (*str)
-	{
-		while ((*str >= 9 && *str <= 13) || *str == ' ')
-			str++;
-		if (ft_isalpha(*str))
-			return (*error = 1, 0);
-		if (*str == '+' || *str == '-' || ft_isalpha(*str))
-			if (*str++ == '-')
-				c *= -1;
-		while (*str <= '9' && *str >= '0')
-			x = x * 10 + (*str++ - '0');
-		if (x > 0x7fffffff && c == 1)
-			return (*error = 1, 0);
-		if (x > 0x80000000 && c == -1)
-			return (*error = 1, 0);
-		return (c * x);
+	ret = 0;
+	minus = 0;
+	counter = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
+	if (*str == '+' || *str == '-')
+		if (*(str++) == '-')
+			minus++;
+	while (*str <= '9' && *str >= '0')
+	{
+		ret = ret * 10 + (*str++ - '0');
+		counter++;
 	}
-	*error = 1;
-	return (0);
+	if (counter > 10 || (ret > 0x7fffffff && !minus)
+		|| (ret > 0x80000000 && minus))
+		return (*error = 1, 0);
+	if (minus)
+		ret *= -1;
+	return (*error = 0, ret);
 }
 
 void	free_biarr(char **fr)
@@ -61,20 +58,3 @@ void print_biarr(char **str)
 		str++;
 	}
 }
-int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n)
-{
-	int	len;
-
-	len = ft_strlen(s1) - n;
-	if (n == 0)
-		return (0);
-	while (len --)
-		s1++;
-	while (*s1 && *s2 && *s1 == *s2 && --n)
-	{
-		s1 ++;
-		s2 ++;
-	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
-}
-

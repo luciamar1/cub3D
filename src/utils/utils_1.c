@@ -84,5 +84,4 @@ int	is_digit_space_str(char *str)
 	if (str[counter])
 		return (0);
     return(1);
-
 }
