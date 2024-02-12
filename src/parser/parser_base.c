@@ -3,7 +3,7 @@
 int check_extension(char *document)
 {
     if(ft_str_rev_n_cmp(document, ".cub", 4))
-        return(print_error("incorrect extension\n"), 0);
+        return(0);
     return (1);
 }
 

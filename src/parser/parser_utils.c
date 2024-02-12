@@ -48,7 +48,7 @@ int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n)
 	len = ft_strlen(s1) - n;
 	if (n == 0)
 		return (0);
-	while (len --)
+	while (len-- > 0)
 		s1++;
 	while (*s1 && *s2 && *s1 == *s2 && --n)
 	{
