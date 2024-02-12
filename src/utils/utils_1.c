@@ -73,14 +73,10 @@ char **strdup_bi(char **str)
 int	is_digit_space_str(char *str)
 {
 	int counter;
-    int status;
 
-    status = 0,
 	counter = 0;
     while(str[counter] && (is_space(str[counter]) || ft_isdigit(str[counter]) || str[counter] == ',')) 
-	{
 		counter ++;
-    }
 	if (str[counter])
 		return (0);
     return(1);

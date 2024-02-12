@@ -7,8 +7,8 @@ int main(int argc, char **argv)
 
 	err = 0;
 	doc = parser(argc, argv, &err);
-	if(err)
-		return(1);
+	if (err)
+		return (1);
 	printf("mapa bueno\n");
 	//free_biarr(doc.map);
 	return(0);

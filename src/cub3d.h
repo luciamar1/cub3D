@@ -65,6 +65,7 @@ int check_map(char **map);
 int is_space(char character);
 int move_to_space(char **str);
 char **read_document(char *extension);
+int try_textures(char   *str_doc, int *err_doc, t_doc *doc, int *textures);
 
 //utils
 void	free_biarr(char **fr);

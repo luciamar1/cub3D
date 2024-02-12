@@ -1,4 +1,4 @@
-F 200,200    ,150
+F 0, 0    , 150   
 C     150    ,     96,     4    
 WE ./xpm/wall_north.xpm
 SO ./xpm/wall_north.xpm
