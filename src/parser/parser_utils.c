@@ -36,8 +36,7 @@ void    put_value_color(t_colors *colors, int value, char   type)
     {
         colors->floor.r = value;
         colors->floor.g = value;
-        colors->floor.b = value;   
-
+        colors->floor.b = value;
     }
 }
 

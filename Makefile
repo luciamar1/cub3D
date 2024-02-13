@@ -4,6 +4,7 @@ NAME := cub3D
 # Archivos fuente principales
 SRCS := src/main/main.c \
 		src/parser/check_colors.c \
+		src/parser/check_map.c \
 		src/parser/check_create_doc.c \
 		src/parser/check_textures.c \
 		src/parser/parser_base.c \
