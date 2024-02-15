@@ -61,11 +61,13 @@ typedef struct s_doc
 t_doc   parser(int argc, char **argv, int *err);
 t_doc check_create_document(char **str_doc, int *err);
 int    try_colors(char   *str_doc, int *err_doc, t_doc *doc, int *colors);
-int check_map(char **map);
+int check_map(char **map, t_doc *doc);
 int is_space(char character);
 int move_to_space(char **str);
 char **read_document(char *extension);
 int try_textures(char   *str_doc, int *err_doc, t_doc *doc, int *textures);
+char **create_real_map(char **check, char **map);
+
 
 //utils
 void	free_biarr(char **fr);

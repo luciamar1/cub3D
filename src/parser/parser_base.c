@@ -29,7 +29,7 @@ t_doc   parser(int argc, char **argv, int *err_parser)
     if (err)
         return((*err_parser = 1), doc);
     //print_biarr(doc.map);
-    if (!check_map(doc.map))
+    if (!check_map(doc.map, &doc))
         return((print_error("map error\n")), (*err_parser = 1), doc);
     print_doc(doc);
     return((*err_parser = 0), doc);
