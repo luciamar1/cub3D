@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+
+
 int is_orientation(char orientation)
 {
     if (orientation == 'N' || orientation == 'S' \
@@ -7,7 +9,6 @@ int is_orientation(char orientation)
         return (1);
     return (0);
 }
-
 int recursive_function(char **map, size_t x, size_t y)
 {
     if (x < 0 || !map[x] || ft_strlen(map[x]) <= y || y < 0)
@@ -56,24 +57,38 @@ int verify_if_close(char **str)
 }
 
 
-void spaces_to_zeros(char **map)
+
+
+int verif_characters(char **map)
 {
+    int person;
     int prim;
     int seg;
 
-    prim = 0;
+    seg = ((prim = 0), (person = 0), 0);
     while(map[prim])
     {
-        seg = 0;
         while(map[prim][seg])
         {
-            if(map[prim][seg] == 0x20)
-                map[prim][seg] = '0';
+            if(map[prim][seg] == '1' || map[prim][seg] == '0' \
+            || map[prim][seg] == 0x20  || is_orientation(map[prim][seg]))
+            {
+                if (map[prim][seg] == 0x20)
+                    map[prim][seg] = '0';
+                if (is_orientation(map[prim][seg]))
+                    person ++;
+            }
+            else 
+                return(0);
             seg ++;
         }
-        prim ++;
+        seg = ((prim ++), 0);
     }
+    if (person != 1)
+        return(0);
+    return(1);
 }
+
 
 
 int check_map(char **map, t_doc *doc)
@@ -81,8 +96,9 @@ int check_map(char **map, t_doc *doc)
     char **aux;
     char **real_map;
 
+    if(!verif_characters(map))
+        return (0);
     aux = strdup_bi(map);
-    spaces_to_zeros(map);
     if (!aux)
         return(print_error("fail malloc\n"), 0);
     if(!verify_if_close(aux))
