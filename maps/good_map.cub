@@ -4,7 +4,9 @@ WE ./xpm/wall_north.xpm
 SO ./xpm/wall_north.xpm
 NO ./xpm/wall_north.xpm
 EA ./xpm/wall_north.xpm
-1
+
+
+               1
 1
 1
                       111
@@ -16,7 +18,7 @@ EA ./xpm/wall_north.xpm
   1
     1
       1          1                                                                                111111
-1                                                                                                1000011
+1                                                                                                1000011  
 1                                                                                                1011001
 1                                                                                                100N101
 1                                                                                                 100001
@@ -26,5 +28,6 @@ EA ./xpm/wall_north.xpm
                  111                 111                 111                 111                 111
                                                 1
                  1                                  1
+
 
 
