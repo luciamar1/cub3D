@@ -8,10 +8,11 @@ int len_first_realmap(char **check, int *pos_x_init)
     int y;
     int len;
 
-    init = ((len = 0), (end = -1), (x = 0), (y = 0), -1);
+    init = ((len = 0), (end = -1), (x = 0), -1);
     while(check[x])
     {
         len ++;
+        y = 0;
         while(check[x][y])
         {
             if (check[x][y] == 'C')
@@ -19,34 +20,30 @@ int len_first_realmap(char **check, int *pos_x_init)
                 if (init == -1)
                     *pos_x_init = ((init = len), x);
                 end = len;
+				break ;
             }
             y ++;
         }
-        y = ((x ++), 0);
+		x ++;
     }
     return (end - init + 1);
 }
 
 int len_sec_realmap(char *check, int y)
 {
-    int len;
-    int verif;
+    int last;
+	int y_copy;
 
-    len = 0;
-    verif = 0;
-    while(check[y])
-    {
+	y_copy = y;
+    while (check[y])
+	{
         if (check[y] == 'C')
-        {
-            verif = 1;
-        }
-        if(verif && check[y] != 'C')
-            break ;
-        len ++;
-        y ++;
-    }
-    return(len);
+            last = y;
+		y++;
+	}
+    return (last - y_copy + 1);
 }
+
 char	*strdup_init_end(const char *s1, int len, int init)
 {
 	char	*ret;
@@ -73,15 +70,16 @@ int search_y_init(char **str)
 
     x = 0;
     y = 0;
+	position = -1;
     while (str[x])
     {
         while (str[x][y])
         {
             if (str[x][y] == 'C')
             {
-                if(y < position)
+                if (y < position || position == -1)
                     position = y;
-                break;
+                break ;
             }
             y ++;
         }
@@ -95,21 +93,21 @@ char **create_real_map(char **check, char **map)
 {
     char    **real;
     int     len_first;
-    int     len_sec;
     int     x_init;
     int     y_init;
     int     x_real;
 
-    x_real = ((x_init = 0), (y_init = search_y_init(check)), 0);
     len_first = len_first_realmap(check, &x_init);
     real = malloc(sizeof(char *) * (len_first + 1));
     if (!real)
-        return(NULL);
+        return (NULL);
+	y_init = search_y_init(check);
+    x_real = 0;
     while (len_first)
     {
-        len_sec = len_sec_realmap(check[x_init], y_init);
-        real[x_real] =  strdup_init_end(map[x_init], len_sec, y_init);
-        if (!real[x_real])
+		real[x_real] = strdup_init_end(map[x_init], \
+			len_sec_realmap(check[x_init], y_init), y_init);
+		if (!real[x_real])
             return(free_biarr(real), NULL);
         x_init ++;
         x_real ++;

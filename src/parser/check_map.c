@@ -1,7 +1,5 @@
 #include "cub3d.h"
 
-
-
 int is_orientation(char orientation)
 {
     if (orientation == 'N' || orientation == 'S' \
@@ -56,18 +54,17 @@ int verify_if_close(char **str)
     return (recursive_function(str, x, y));
 }
 
-
-
-
 int verif_characters(char **map)
 {
     int person;
     int prim;
     int seg;
 
-    seg = ((prim = 0), (person = 0), 0);
+	prim = 0;
+    person = 0;
     while(map[prim])
     {
+        seg = 0;
         while(map[prim][seg])
         {
             if(map[prim][seg] == '1' || map[prim][seg] == '0' \
@@ -79,35 +76,31 @@ int verif_characters(char **map)
                     person ++;
             }
             else 
-                return(0);
+                return (0);
             seg ++;
         }
-        seg = ((prim ++), 0);
+		prim++;
     }
-    if (person != 1)
-        return(0);
-    return(1);
+    return (person == 1);
 }
 
-
-
-int check_map(char **map, t_doc *doc)
+int check_map(t_doc *doc)
 {
     char **aux;
     char **real_map;
 
-    if(!verif_characters(map))
-        return (0);
-    aux = strdup_bi(map);
+    if(!verif_characters(doc->map))
+        return (print_error("invalid characters\n"), 0);
+    aux = strdup_bi(doc->map);
     if (!aux)
-        return(print_error("fail malloc\n"), 0);
+        return (print_error("malloc fail\n"), 0);
     if(!verify_if_close(aux))
-        return (0);
-    real_map = create_real_map(aux, map);
+        return (print_error("map not closed\n"), free_biarr(aux), 0);
+    real_map = create_real_map(aux, doc->map);
     free_biarr(aux);
     free_biarr(doc->map);
     if(!real_map)
-        return(print_error("fail malloc\n"),0);
+        return (print_error("malloc fail\n"), 0);
     doc->map = real_map;
-    return(1);
+    return (1);
 }

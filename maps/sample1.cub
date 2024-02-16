@@ -5,9 +5,10 @@ SO ./xpm/wall_north.xpm
 NO ./xpm/wall_north.xpm
 EA ./xpm/wall_north.xpm
 
-  1111111
-  1000001
- 11011101
- 1101  1
-10N01
- 111
+
+ 111111111
+1N000000001
+ 1111011101
+    101 101
+    101 101
+    111  1

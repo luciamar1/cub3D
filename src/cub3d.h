@@ -61,7 +61,7 @@ typedef struct s_doc
 t_doc   parser(int argc, char **argv, int *err);
 t_doc check_create_document(char **str_doc, int *err);
 int    try_colors(char   *str_doc, int *err_doc, t_doc *doc, int *colors);
-int check_map(char **map, t_doc *doc);
+int check_map(t_doc *doc);
 int is_space(char character);
 int move_to_space(char **str);
 char **read_document(char *extension);
@@ -81,6 +81,6 @@ int	ft_atoi_better(const char *str, int *error);
 int	is_digit_space_str(char *str);
 
 void    put_value_color(t_colors *colors, int value, char   type);
-int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
+int		ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
 
 #endif
