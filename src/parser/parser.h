@@ -3,6 +3,7 @@
 
 
 #include "libft.h"
+#include "../cub3d.h"
 # include "parser/parser.h"
 
 

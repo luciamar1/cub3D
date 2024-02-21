@@ -10,8 +10,10 @@
 #include "libft.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
+#include "raycasting/raycasting.h"
+
+
 
 # define SIZE 32
-
 
 #endif
