@@ -133,4 +133,4 @@ int main()
     t_float_vector wall;
     hit_ray_wall(map, direction, person);
     return(0);
-}
+}   
