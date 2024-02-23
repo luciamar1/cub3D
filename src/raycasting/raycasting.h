@@ -4,10 +4,10 @@
 #include "../cub3d.h"
 
 
-typedef struct s_double_vector
+typedef struct s_float_vector
 {
-	double	x;
-	double	y;
-}				t_double_vector;
+	float	x;
+	float	y;
+}				t_float_vector;
 
 #endif

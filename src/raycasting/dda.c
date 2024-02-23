@@ -3,57 +3,114 @@
 # include <unistd.h>
 # include <stdio.h>
 
+
 typedef struct s_vector
 {
 	int	x;
 	int	y;
 }				t_vector;
 
-typedef struct s_double_vector
+typedef struct s_float_vector
 {
-	double	x;
-	double	y;
-}				t_double_vector;
+	float	x;
+	float	y;
+}				t_float_vector;
 
-t_double_vector calculate_step(t_double_vector direction)
+
+t_vector choose_walls(t_float_vector person)
 {
-    t_double_vector    step;
+    t_vector walls;
 
-    if (direction.x < 0)
+    if ((float) (int) person.x == person.x)
     {
-        direction.x *= -1;
-        step.x = -1;
+        if(person.x > 0)
+            walls.x = person.x + 1;
+        else if(person.x < 0)
+            walls.x = person.x - 1;
+        else
+            walls.x = -42;
+        printf("soy entero %d   %d\n", walls.x, person.x);
     }
     else
-        step.x = 1;
-    step.y = direction.y / direction.x;
-    return (step);
+    {
+        if(person.x > 0)
+            walls.x = ceil(person.x);
+        else if(person.x < 0)
+            walls.x -= floor(person.x);
+        else
+            walls.x = -42;
+        printf("soy decimal %d\n", walls.x);
+    }
+
+    if ((float) (int) person.y == person.y)
+    {
+        if(person.y > 0)
+            walls.y = person.y + 1;
+        else if(person.y < 0)
+            walls.y = person.y - 1;
+        else
+            walls.y = -42;
+        printf("soy entero %d\n", walls.y);
+    }
+    else
+    {
+        if(person.y > 0)
+            walls.y = ceil(person.y);
+        else if(person.y < 0)
+            walls.y -= floor(person.y);
+        else
+            walls.y = -42;
+        printf("soy decimal %d\n", walls.y);
+    }
+    return (walls);
 }
 
-t_vector    verif_ray(char map[][9], t_vector person, t_double_vector direction)
+float   calculate_distance(int  wall, float person)
 {
-    t_double_vector step;
-    t_double_vector double_vision;
+    float   distance;
 
-    int counter;
+    if (wall > person)
+        return(wall - person);
+    return(person - wall);
+}
 
-    counter = 1;
-    step = calculate_step(direction);
-    printf("step x == %f\nstep y == %f\n", step.x, step.y);
-    double_vision.x = (double) person.x;
-    double_vision.y = (double) person.y;
-    while(map[person.x][person.y])
+t_float_vector   calculate_point_wall(t_float_vector distance, t_float_vector direction, int  x_y)
+{
+
+    if(x_y == 0)
     {
-        printf("\n\nperson x == %d\nperson y == %d\n", person.x, person.y);
-        if (map[person.x][person.y] == '1')
-            return(person);
-        double_vision.x += step.x ;
-        double_vision.y += step.y;
-        person.x = floor(double_vision.x);
-        person.y = floor(double_vision.y);
-        printf("\n\nluego person x == %d\nluego person y == %d\n", person.x, person.y);
+        distance.y = distance.x * direction.y / direction.x;
     }
-    return (person);
+    if (x_y == 1)
+    {
+        distance.x = distance.y * direction.y / direction.y;
+    }
+    return(distance);
+}
+
+t_float_vector  hit_ray_wall(char **map, t_float_vector direction, t_float_vector person)
+{
+    t_vector walls;
+    int counter;
+    t_float_vector   point_wall;
+    t_float_vector   distance;
+    while (1)
+    {
+        counter = 1;
+        walls = (choose_walls(direction));
+        printf("walls %d %d\n", walls.x, walls.y);
+        while(counter >= 0)
+        {
+            if(counter == 0)
+                distance.x = calculate_distance(walls.x, person.x);
+            else
+                distance.y = calculate_distance(walls.y, person.y);
+            distance = calculate_point_wall(distance, direction, counter);
+
+        }
+
+    }
+
 }
 
 int main()
@@ -65,18 +122,15 @@ int main()
     "10000001",
     "11111111"
     };
-    t_vector person;
-    person.x = 3;
-    person.y = 2;
+    t_float_vector person;
+    person.x = 1;
+    person.y = 1;
 
-    t_double_vector direction;
-    direction.x = 3;
+    t_float_vector direction;
+    direction.x = -1;
     direction.y = 2;
 
-    t_vector pared;
-    pared = verif_ray(map, person, direction);
-
-    printf("x == %d\n", pared.x);
-    printf("y == %d\n", pared.y);
+    t_float_vector wall;
+    hit_ray_wall(map, direction, person);
     return(0);
 }
