@@ -69,7 +69,7 @@ t_float_vector   calculate_point_wall(t_float_vector distance, t_float_vector di
     {
         distance.x = (distance.y * direction.x) / direction.y;
     }
-    printf("\n\ncalculate point.x  %f     calculate point.y  %f\n\n", distance.x, distance.y);
+    // printf("\n\ncalculate point.x  %f     calculate point.y  %f\n\n", distance.x, distance.y);
     // if(direction.x < 0)
     // {
     //     distance.x *= -1;
@@ -109,6 +109,7 @@ t_vector  hit_ray_wall(t_float_vector direction, t_float_vector person, int *x_y
     {
         *x_y = 1;
         walls = (choose_walls(person, direction));
+        printf("choose walls %d %d\n", walls.x, walls.y);
         while(*x_y >= 0)
         {
             if(*x_y == 0)
@@ -124,6 +125,7 @@ t_vector  hit_ray_wall(t_float_vector direction, t_float_vector person, int *x_y
             {
                 check.x = (int)floor(person_aux.x);
                 check.y = (int)floor(person_aux.y);
+                //printf("entro   %f %f\n", person_aux.x, person_aux.y);
                 person = person_aux;
                 if(map[check.x][check.y] == '1')
                 {
@@ -160,7 +162,7 @@ float   calculate_hit_point(t_vector    hit_index, t_float_vector person, t_floa
     float           hypotenuse;
     float           wall;
 
-    printf("\n\nhit index %d %d\n", hit_index.x, hit_index.y);
+    // printf("\n\nhit index %d %d\n", hit_index.x, hit_index.y);
     if(x_y == 0)
     {
         wall = choose_point_wall(direction.x, hit_index.x);
@@ -171,11 +173,11 @@ float   calculate_hit_point(t_vector    hit_index, t_float_vector person, t_floa
         wall = choose_point_wall(direction.y, hit_index.y);
         cathetus.y = distance.y = calculate_distance(wall, person.y);
     }
-    printf("distancia %f %f\n", distance.x, distance.y);
+    // printf("distancia %f %f\n", distance.x, distance.y);
     distance = calculate_point_wall(distance, direction, x_y);
     distance.x += person.x;
     distance.y += person.y;
-    printf("calculate point wall %f %f\n", distance.x, distance.y);
+    // printf("calculate point wall %f %f\n", distance.x, distance.y);
     if(x_y == 0)
     {
         cathetus.y = calculate_distance(person.y, fabs(distance.y));
@@ -193,8 +195,8 @@ int main()
     float   hypotenuse;
     t_vector hit_index;
     t_float_vector person;
-    person.x = 4;
-    person.y = 1;
+    person.x = 3.5;
+    person.y = 1.5;
     int x_y;
     
     x_y = 1;
@@ -204,6 +206,7 @@ int main()
 
     t_float_vector wall;
     hit_index = hit_ray_wall( direction, person, &x_y);
-    hypotenuse = calculate_hit_point(hit_index, person, direction, x_y);
+    printf("hit index %d %d\n", hit_index.x, hit_index.y);
+    //hypotenuse = calculate_hit_point(hit_index, person, direction, x_y);
     return(0);
 }   
