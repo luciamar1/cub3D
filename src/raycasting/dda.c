@@ -114,6 +114,22 @@ t_vector    what_verif(t_float_vector ray, t_float_vector   direction)
     return (verif);
 }
 
+t_vector verif_mendi(t_float_vector person, t_float_vector direction)
+{
+    t_vector    mendi;
+
+    if(direction.x < 0)
+        mendi.x = (int)floor(person.x);
+    if(direction.y < 0)
+        mendi.y = (int)floor(person.y);
+
+    if(direction.x >  0)
+        mendi.x = (int)ceil(person.x);
+    if(direction.y >  0)
+        mendi.y = (int)ceil(person.y);
+    return(mendi);
+}
+
 int verif_if_walls(t_float_vector person, t_float_vector distance, t_float_vector wall)
 {
     t_vector    verif;
@@ -125,7 +141,7 @@ int verif_if_walls(t_float_vector person, t_float_vector distance, t_float_vecto
     printf("\nverif person walls\n");
     print_fvector(person);
     sleep(1);
-    verif = what_verif(person, distance);
+    verif = verif_mendi(person, distance);
     if (verif.x == wall.x && verif.y == wall.y)
         return(1);
     return (0);
@@ -147,7 +163,6 @@ float   calc_hypotenuse(t_float_vector person, t_float_vector origin)
     return (hypothenuse);
 }
 
-
 float calculate_distance(t_float_vector person, t_float_vector direction)
 {
         int i;
@@ -155,7 +170,7 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
     t_float_vector    wall;
     int         x_y;
     t_float_vector       distance;
-    //t_vector        verif;
+    t_vector        verif;
     t_float_vector  origin_vector;
     t_float_vector  aux_person;
 
@@ -165,7 +180,7 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
     char map[5][9] = {
         "11111111",
         "10000001",
-        "10111101",
+        "10000001",
         "10000001",
         "11111111",
     };
@@ -188,8 +203,11 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
                 person.y = person.y + distance.y;
 
                // verif = what_verif(person, direction);
+                verif = verif_mendi(person, direction);
+                printf("mendi\n");
+                print_vector(verif);
                 //print_fvector(person);
-                if (map[(int)floor(person.x)][(int)floor(person.y)] == '1')
+                if (map[verif.x][verif.y] == '1')
                 {
                     printf("punto hit\n");
                     print_fvector(person);
@@ -225,7 +243,7 @@ int main(void)
 
     t_float_vector direction;
     direction.x = -1;
-    direction.y = 1.5;
+    direction.y = 2;
     calculate_distance(person, direction);
     return (0);
 }
