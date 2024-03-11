@@ -45,9 +45,9 @@ float choose_wall(float person, float direction)
     }
     else
     {
-        if (direction < 0)
+        if (direction <= 0)
             return (floor(person));
-        if (direction >= 0)
+        if (direction > 0)
             return (ceil(person));
     }
     return (-42);
@@ -117,6 +117,18 @@ t_vector    what_verif(t_float_vector ray, t_float_vector   direction)
 t_vector verif_mendi(t_float_vector person, t_float_vector direction)
 {
     t_vector    mendi;
+    if((float) (int) person.x == person.x  || (float) (int) person.x == person.x)
+    {
+        if(direction.x < 0)
+            person.x = person.x - 1;
+        if(direction.y < 0)
+            person.y = person.y - 1;
+        if(direction.x > 0)
+            person.x = person.x + 1;
+        if(direction.y > 0)
+            person.y = person.y + 1;
+        
+    }
 
     if(direction.x < 0)
         mendi.x = (int)floor(person.x);
@@ -130,18 +142,39 @@ t_vector verif_mendi(t_float_vector person, t_float_vector direction)
     return(mendi);
 }
 
+t_vector verif_gg(t_float_vector person, t_float_vector direction)
+{
+    t_vector    mendi;
+  
+
+    if(direction.x <= 0)
+        mendi.x = (int)floor(person.x);
+    if(direction.y <= 0)
+        mendi.y = (int)floor(person.y);
+
+    if(direction.x >  0)
+        mendi.x = (int)ceil(person.x);
+    if(direction.y >  0)
+        mendi.y = (int)ceil(person.y);
+    return(mendi);
+}
+
 int verif_if_walls(t_float_vector person, t_float_vector distance, t_float_vector wall)
 {
     t_vector    verif;
+    printf("                              person %f\n", person.x);
+    printf("                              distance %f\n", distance.x);
     person.x += distance.x;
     person.y += distance.y;
+
     printf("walls\n");
     print_fvector(wall);
 
-    printf("\nverif person walls\n");
+    printf("\n                                       verif person walls\n");
     print_fvector(person);
+    printf("\n\n\n");
     sleep(1);
-    verif = verif_mendi(person, distance);
+    verif = verif_gg(person, distance);
     if (verif.x == wall.x && verif.y == wall.y)
         return(1);
     return (0);
@@ -237,12 +270,12 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
 int main(void)
 {
     t_float_vector person;
-    person.x = 3.5;
+    person.x = 3,1;
     person.y = 1;
     
 
     t_float_vector direction;
-    direction.x = -1;
+    direction.x = 0;
     direction.y = 2;
     calculate_distance(person, direction);
     return (0);
@@ -373,7 +406,7 @@ int main(void)
 // {
 //     if(floor(person.x) == walls.x && floor(person.y) == walls.y)
 //     {
-//         //sleep(2);
+//         /(2);
 //         return(1);
 //     }
 //     return(0);
