@@ -198,6 +198,27 @@ float   calc_hypotenuse(t_float_vector person, t_float_vector origin)
 
 float calculate_distance(t_float_vector person, t_float_vector direction)
 {
+    int counter;
+    char map[5][9] = {
+        "11111111",
+        "10000001",
+        "10000001",
+        "10000001",
+        "11111111",
+    };
+    if(direction.x == 0)
+    {
+        counter = (int)person.y;
+        while (map[person.x][counter] && map[counter] != '1')
+        {
+            counter ++;
+        }
+        if (mp)
+    }
+}
+
+float calculate_distance(t_float_vector person, t_float_vector direction)
+{
         int i;
         int pepe;
     t_float_vector    wall;
@@ -219,6 +240,10 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
     };
 
          map[(int)(person.x)][(int)(person.y)] = 'P';
+    if(direction.x == 0 || direction.y == 0)
+    {
+        return(null_direction(person, direction));
+    }
     while (1)
     {
         x_y = 1;
@@ -275,7 +300,7 @@ int main(void)
     
 
     t_float_vector direction;
-    direction.x = 0;
+    direction.x = -1;
     direction.y = 2;
     calculate_distance(person, direction);
     return (0);
