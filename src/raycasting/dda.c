@@ -40,8 +40,10 @@ float choose_wall(float person, float direction)
     {
         if (direction < 0)
             return (person - 1);
-        if (direction >= 0)
+        if (direction > 0)
             return (person + 1);
+        if (direction == 0)
+            return(person);
     }
     else
     {
@@ -83,7 +85,9 @@ t_float_vector   vector_distance(t_float_vector person, t_float_vector   wall, t
     if (x_y == 1)
     {
         vector_distance.y = calc_distance(person.y, wall.y);
+        printf("HOLAAA\n");
         vector_distance.x = (vector_distance.y * direction.x) / direction.y;
+        printf("ADIOS\n");
     }
     return (vector_distance);
 }
@@ -114,31 +118,45 @@ t_vector    what_verif(t_float_vector ray, t_float_vector   direction)
     return (verif);
 }
 
-t_vector verif_mendi(t_float_vector person, t_float_vector direction)
+t_vector  verif_mendi(t_float_vector person, t_float_vector direction)
 {
     t_vector    mendi;
-    if((float) (int) person.x == person.x  || (float) (int) person.x == person.x)
+
+
+    if((float) (int) person.x == person.x  && (float) (int) person.y == person.y)
     {
+        printf("jujuiJUIJUI\n");
+        if(direction.x == 0)
+            mendi.x = (int)floor(person.x);
+        if(direction.y == 0)
+            mendi.y = (int)floor(person.y);
         if(direction.x < 0)
-            person.x = person.x - 1;
+            mendi.x = person.x - 1;
         if(direction.y < 0)
-            person.y = person.y - 1;
+            mendi.y = person.y - 1;
         if(direction.x > 0)
-            person.x = person.x + 1;
+            mendi.x = person.x + 1;
         if(direction.y > 0)
-            person.y = person.y + 1;
+            mendi.y = person.y + 1;
+        print_fvector(person);
+        return(mendi);
         
     }
 
-    if(direction.x < 0)
-        mendi.x = (int)floor(person.x);
-    if(direction.y < 0)
-        mendi.y = (int)floor(person.y);
+        if(direction.x == 0)
+            mendi.x = (int)floor(person.x);
+        if(direction.x < 0)
+            mendi.x = (int)floor(person.x);
+        if(direction.y < 0)
+            mendi.y = (int)floor(person.y);
 
-    if(direction.x >  0)
-        mendi.x = (int)ceil(person.x);
-    if(direction.y >  0)
-        mendi.y = (int)ceil(person.y);
+        if(direction.y == 0)
+            mendi.y = (int)floor(person.y);
+        if(direction.x >  0)
+            mendi.x = (int)ceil(person.x);
+        if(direction.y >  0)
+            mendi.y = (int)ceil(person.y);
+        print_fvector(person);
     return(mendi);
 }
 
@@ -175,6 +193,8 @@ int verif_if_walls(t_float_vector person, t_float_vector distance, t_float_vecto
     printf("\n\n\n");
     sleep(1);
     verif = verif_gg(person, distance);
+    printf("VERIFFFFF\n");
+    print_vector(verif);
     if (verif.x == wall.x && verif.y == wall.y)
         return(1);
     return (0);
@@ -186,6 +206,11 @@ float   calc_hypotenuse(t_float_vector person, t_float_vector origin)
     float   cathetus_b;
     float   hypothenuse;
 
+    printf("\n\n");
+    printf("hit\n");
+    print_fvector(person);
+    printf("origin\n");
+    print_fvector(origin);
     cathetus_a = calc_distance(person.x, origin.x);
     cathetus_b = calc_distance(person.y, origin.y);
     hypothenuse = sqrt(cathetus_a * cathetus_a + cathetus_b * cathetus_b); 
@@ -196,26 +221,7 @@ float   calc_hypotenuse(t_float_vector person, t_float_vector origin)
     return (hypothenuse);
 }
 
-float calculate_distance(t_float_vector person, t_float_vector direction)
-{
-    int counter;
-    char map[5][9] = {
-        "11111111",
-        "10000001",
-        "10000001",
-        "10000001",
-        "11111111",
-    };
-    if(direction.x == 0)
-    {
-        counter = (int)person.y;
-        while (map[person.x][counter] && map[counter] != '1')
-        {
-            counter ++;
-        }
-        if (mp)
-    }
-}
+
 
 float calculate_distance(t_float_vector person, t_float_vector direction)
 {
@@ -233,17 +239,13 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
 
     char map[5][9] = {
         "11111111",
-        "10000001",
-        "10000001",
+        "10000111",
+        "10000111",
         "10000001",
         "11111111",
     };
 
          map[(int)(person.x)][(int)(person.y)] = 'P';
-    if(direction.x == 0 || direction.y == 0)
-    {
-        return(null_direction(person, direction));
-    }
     while (1)
     {
         x_y = 1;
@@ -256,10 +258,12 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
             printf("\n\n");
             if(verif_if_walls(person, distance, wall))
             {
+                printf("ENTRO\n");
          
                 person.x = person.x + distance.x;
                 person.y = person.y + distance.y;
-
+                printf("PERSON\n");
+                print_fvector(person);
                // verif = what_verif(person, direction);
                 verif = verif_mendi(person, direction);
                 printf("mendi\n");
@@ -269,7 +273,11 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
                 {
                     printf("punto hit\n");
                     print_fvector(person);
-
+                    if(direction.x == 0 || direction.y == 0)
+                    {
+                        printf("hola %f  %f\n", origin_vector.x - person.x, origin_vector.y - person.y);
+                        return(fabs((origin_vector.x - person.x) + (origin_vector.y - person.y)));
+                    }
                     return (calc_hypotenuse(person, origin_vector));
                 }
                 if(person.x == 1 && person.y == 6)
@@ -295,14 +303,14 @@ float calculate_distance(t_float_vector person, t_float_vector direction)
 int main(void)
 {
     t_float_vector person;
-    person.x = 3,1;
-    person.y = 1;
+    person.x = 3;
+    person.y = 2;
     
 
     t_float_vector direction;
     direction.x = -1;
     direction.y = 2;
-    calculate_distance(person, direction);
+    printf("distance %f\n", calculate_distance(person, direction));
     return (0);
 }
 
