@@ -13,6 +13,7 @@ SRCS := src/main/main.c \
 		src/parser/str_doc.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
+		src/raycasting/dda.c \
 		
 
 # Archivos objeto
@@ -38,6 +39,7 @@ objs:
 	@mkdir -p	objs/main	\
 				objs/parser	\
 				objs/utils	\
+				objs/raycasting	\
 
 #compilar src
 objs/%.o: src/%.c | objs

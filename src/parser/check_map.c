@@ -54,7 +54,32 @@ int verify_if_close(char **str)
     return (recursive_function(str, x, y));
 }
 
-int verif_characters(char **map)
+t_float_vector  put_orientation(int x, int y)
+{
+    t_float_vector orientation;
+
+    orientation.x = x;
+    orientation.y = y;
+    return (orientation);
+}
+
+void    put_person_direction(t_map *map, char orientation, int prim, int seg)
+{
+    if(orientation == 'N')
+        map->direction = put_orientation(-1, 0);
+    if(orientation == 'S')
+        map->direction = put_orientation(1, 0);
+    if(orientation == 'E')
+        map->direction = put_orientation(0, 1);
+    if(orientation == 'W')
+        map->direction = put_orientation(0, -1);
+
+    map->person.x = prim;
+    map->person.y = seg;
+}
+
+
+int verif_characters(char **map, t_map *map_params)
 {
     int person;
     int prim;
@@ -73,7 +98,10 @@ int verif_characters(char **map)
                 if (map[prim][seg] == 0x20)
                     map[prim][seg] = '0';
                 if (is_orientation(map[prim][seg]))
+                {
+                    put_person_direction(map_params, map[prim][seg], prim, seg);
                     person ++;
+                }
             }
             else 
                 return (0);
@@ -89,18 +117,20 @@ int check_map(t_doc *doc)
     char **aux;
     char **real_map;
 
-    if(!verif_characters(doc->map))
+    if(!verif_characters(doc->map.bimap, &(doc->map)))
         return (print_error("invalid characters\n"), 0);
-    aux = strdup_bi(doc->map);
+    aux = strdup_bi(doc->map.bimap);
     if (!aux)
         return (print_error("malloc fail\n"), 0);
     if(!verify_if_close(aux))
         return (print_error("map not closed\n"), free_biarr(aux), 0);
-    real_map = create_real_map(aux, doc->map);
+    real_map = create_real_map(aux, doc->map.bimap);
     free_biarr(aux);
-    free_biarr(doc->map);
+    free_biarr(doc->map.bimap);
     if(!real_map)
         return (print_error("malloc fail\n"), 0);
-    doc->map = real_map;
+    doc->map.bimap = real_map;
+
+    
     return (1);
 }

@@ -31,7 +31,7 @@ void	print_doc(t_doc doc)
 	printf("   color ceiling == %d, %d , %d\n", doc.colors.ceiling.r, doc.colors.ceiling.g, doc.colors.ceiling.b);
 	printf("   color floor == %d, %d , %d\n\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
 	printf("\n\nMAP\n");
-	print_biarr(doc.map);
+	print_biarr(doc.map.bimap);
 }
 
 int	strlen_bi(char **str)

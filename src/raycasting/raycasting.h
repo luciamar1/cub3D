@@ -10,10 +10,13 @@ typedef struct s_float_vector
 	float	y;
 }				t_float_vector;
 
-typedef struct s_ray
+typedef struct s_map
 {
-	float	x;
-	float	y;
-}				t_ray;
+	t_float_vector	person;
+	t_float_vector	direction;
+	float			distance;
+	char			**bimap;
+}				t_map;
 
+float calculate_distance(t_map *map);
 #endif

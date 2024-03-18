@@ -4,7 +4,7 @@
 
 #include "libft.h"
 #include "../cub3d.h"
-# include "parser/parser.h"
+# include "raycasting/raycasting.h"
 
 
 typedef struct s_vector
@@ -50,7 +50,7 @@ typedef struct s_doc
     t_colors    colors;
     t_textures  textures;
     t_minilib   program;
-    char        **map;
+    t_map       map;
 } t_doc;
 
 

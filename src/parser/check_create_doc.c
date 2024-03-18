@@ -3,8 +3,8 @@
 void    create_map(char **str_doc, int *err, t_doc *doc)
 {
     str_doc ++;
-    doc->map = strdup_bi(str_doc);
-    if(!doc->map)
+    doc->map.bimap = strdup_bi(str_doc);
+    if(!doc->map.bimap)
     {
         print_error("malloc error\n");
         *err = 1;
@@ -20,7 +20,7 @@ t_doc check_create_document(char **str_doc, int *err)
     int     text;
     int     check_if_create[6];
     
-    doc.map = ((ft_bzero(check_if_create, sizeof(int) * 6)), NULL);
+    doc.map.bimap = ((ft_bzero(check_if_create, sizeof(int) * 6)), NULL);
     doc.program.mlx_pointer = ((colors = 0), (text = 0), mlx_init());
     if (!doc.program.mlx_pointer)
 		return (print_error("mlx_init fail\n"), (*err = 1), doc);
