@@ -86,38 +86,60 @@ t_vector    what_verif(t_float_vector ray, t_float_vector   direction)
     return (verif);
 }
 
+int verif_mendi2(float person, float direction)
+{
+    if(direction >= 0)
+        return((int)person);
+    if(direction < 0)
+        return((int)(person - 1));
+    else 
+        return(-42);
+}   
+
 t_vector  verif_mendi(t_float_vector person, t_float_vector direction)
 {
     t_vector    mendi;
-    print_fvector(person, "person");
-    if(direction.x == 0)
-        mendi.x = (int)floor(person.x);
-    if(direction.y == 0)
-        mendi.y = (int)floor(person.y);
-    if((float) (int) person.x == person.x  && (float) (int) person.y == person.y && person.x != 0 && person.y != 0)
-    {
-        printf("\nfloat\n");
-        if(direction.x < 0)
-            mendi.x = person.x - 1;
-        if(direction.y < 0)
-            mendi.y = person.y - 1;
-        if(direction.x > 0)
-            mendi.x = (int)floor(person.x);
-        if(direction.y > 0)
-            mendi.y = person.y + 1;
-    }
-    else
-    {
-        if(direction.x < 0)
-            mendi.x = (int)floor(person.x);
-        if(direction.y < 0)
-            mendi.y = (int)floor(person.y);
-        if(direction.x >  0)
-            mendi.x = (int)ceil(person.x);
-        if(direction.y >  0)
-            mendi.y = (int)ceil(person.y);
 
-    }
+    mendi.x = -42;
+    mendi.y = -42;
+    if ((float) (int) person.x == person.x)
+        mendi.x = verif_mendi2(person.x, direction.x);
+    if ((float) (int) person.y == person.y)
+        mendi.y = verif_mendi2(person.y, direction.y);
+    print_vector(mendi, "verif");
+    if(mendi.x == -42)
+        mendi.x = floor(person.x);
+    if(mendi.y == -42)    
+        mendi.y = floor(person.y);
+    // print_fvector(person, "person");
+    // if(direction.x == 0)
+    //     mendi.x = (int)floor(person.x);
+    // if(direction.y == 0)
+    //     mendi.y = (int)floor(person.y);
+    // if((float) (int) person.x == person.x  && (float) (int) person.y == person.y && person.x != 0 && person.y != 0)
+    // {
+    //     printf("\nfloat\n");
+    //     if(direction.x < 0)
+    //         mendi.x = person.x - 1;
+    //     if(direction.y < 0)
+    //         mendi.y = person.y - 1;
+    //     if(direction.x > 0)
+    //         mendi.x = (int)floor(person.x);
+    //     if(direction.y > 0)
+    //         mendi.y = person.y + 1;
+    // }
+    // else
+    // {
+    //     if(direction.x < 0)
+    //         mendi.x = (int)floor(person.x);
+    //     if(direction.y < 0)
+    //         mendi.y = (int)floor(person.y);
+    //     if(direction.x >  0)
+    //         mendi.x = (int)ceil(person.x);
+    //     if(direction.y >  0)
+    //         mendi.y = (int)ceil(person.y);
+
+    // }
     return(mendi);
 }
 
@@ -179,7 +201,6 @@ float check_walls(t_float_vector *distance, t_float_vector *ray, t_float_vector 
                 (*ray).x = (*ray).x + (*distance).x;
                 (*ray).y = (*ray).y + (*distance).y;
                 verif = verif_mendi((*ray), (map->direction));
-                print_vector(verif, "verif");
                 if (map->bimap[verif.x][verif.y] == '1')
                 {
                     printf("walls\n");
