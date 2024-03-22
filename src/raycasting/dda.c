@@ -20,11 +20,18 @@ float choose_wall(float person, float direction)
     if ((float) (int) person == person)
     {
         if (direction < 0)
-            return (person - 1);
+            return (person);
         if (direction > 0)
-            return (person + 1);
+            return (person );
         if (direction == 0)
             return(person);
+
+        // if (direction < 0)
+        //     return (person - 1);
+        // if (direction > 0)
+        //     return (person + 1);
+        // if (direction == 0)
+        //     return(person);
     }
     else
     {
@@ -63,6 +70,7 @@ t_float_vector   vector_distance(t_float_vector person, t_float_vector   wall, t
     {
         vector_distance.y = calc_distance(person.y, wall.y);
         vector_distance.x = (vector_distance.y * direction.x) / direction.y;
+        print_fvector(vector_distance, "vector distance\n");
     }
     return (vector_distance);
 }
@@ -89,9 +97,15 @@ t_vector    what_verif(t_float_vector ray, t_float_vector   direction)
 int verif_mendi2(float person, float direction)
 {
     if(direction >= 0)
+    {
         return((int)person);
+    }
     if(direction < 0)
+    {
+        if(person == 0)
+            return((int)person);
         return((int)(person - 1));
+    }
     else 
         return(-42);
 }   
@@ -102,11 +116,18 @@ t_vector  verif_mendi(t_float_vector person, t_float_vector direction)
 
     mendi.x = -42;
     mendi.y = -42;
+    
     if ((float) (int) person.x == person.x)
+    {
         mendi.x = verif_mendi2(person.x, direction.x);
+        printf("mendi x == %d\n", mendi.x);
+    }
     if ((float) (int) person.y == person.y)
+    {
         mendi.y = verif_mendi2(person.y, direction.y);
-    print_vector(mendi, "verif");
+        printf("mendi y == %d\n", mendi.y);
+    }
+    print_vector(mendi, "\nverif");
     if(mendi.x == -42)
         mendi.x = floor(person.x);
     if(mendi.y == -42)    
@@ -163,13 +184,21 @@ t_vector verif_gg(t_float_vector person, t_float_vector direction)
 int verif_if_walls(t_float_vector person, t_float_vector distance, t_float_vector wall)
 {
     t_vector    verif;
+    printf("ANTES\n");
+    print_fvector(person, "PERSON");
     person.x += distance.x;
     person.y += distance.y;
+        printf("DESPUES\n");
+        print_fvector(person, "PERSON");
 
 
     verif = verif_gg(person, distance);
     if (verif.x == wall.x && verif.y == wall.y)
+    {
         return(1);
+
+    }
+    
     return (0);
 }
 
@@ -197,13 +226,19 @@ float check_walls(t_float_vector *distance, t_float_vector *ray, t_float_vector 
             *distance = vector_distance(*ray, *wall, map->direction, x_y);
             if(verif_if_walls(*ray, *distance, *wall))
             {
-         
+                
+                print_fvector(*ray, "person");
+                print_fvectr(*distance, "direction");
                 (*ray).x = (*ray).x + (*distance).x;
                 (*ray).y = (*ray).y + (*distance).y;
                 verif = verif_mendi((*ray), (map->direction));
+                printf("AAAAAAAAAAAA %c\n", map->bimap[verif.x][verif.y]);
+                sleep(2);
                 if (map->bimap[verif.x][verif.y] == '1')
                 {
                     printf("walls\n");
+                    print_fvector(map->person, "person");
+                    print_fvector(*ray, "ray");
                     if((map->direction).x == 0 || (map->direction).y == 0)
                         return(fabs(((map->person).x - (*ray).x) + ((map->person).y - (*ray).y)));
                     return (calc_hypotenuse((*ray), (map->person)));
