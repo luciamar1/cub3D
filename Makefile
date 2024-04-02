@@ -14,6 +14,7 @@ SRCS := src/main/main.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
 		src/raycasting/dda.c \
+		src/raycasting/ddanew.c \
 		
 
 # Archivos objeto

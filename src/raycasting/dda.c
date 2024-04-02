@@ -246,7 +246,6 @@ float check_walls(t_float_vector *distance, t_float_vector *ray, t_float_vector 
 
     while (x_y >= 0)
     {
-        printf("dentro\n");
             *distance = vector_distance(*ray, *wall, map->direction, x_y);
             if(verif_if_walls(*ray, *distance, *wall))
             {
@@ -287,7 +286,6 @@ float calculate_distance(t_map *map)
     ray = map->person;
     while (1)
     {
-        printf("fuera\n");
         wall = choose_walls(ray, map->direction);
         ret = check_walls(&distance, &ray, &wall, map); 
         if  (ret >= 0)

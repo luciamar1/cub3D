@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	// doc.map.direction.y = 2;
 	printf("\n\nmain\nperson %f %f\n", doc.map.person.x, doc.map.person.y);
     printf("orientation %f %f\n", doc.map.direction.x, doc.map.direction.y);
-	printf("distance %f\n", calculate_distance(&(doc.map)));
+	printf("distance %f\n", calc_distance_new(&(doc.map)));
 	//free_biarr(doc.map);
 	return(0);
 }
