@@ -1,7 +1,7 @@
-#include "cub3d.h"
-#include <math.h>
-# include <unistd.h>
-# include <stdio.h>
+// #include "cub3d.h"
+// #include <math.h>
+// # include <unistd.h>
+// # include <stdio.h>
 
 // void    print_vector(t_vector vector, char *name)
 // {
