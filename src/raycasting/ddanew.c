@@ -144,8 +144,9 @@ float   calc_hypotenuse(t_float_vector p_ray, t_float_vector person)
     float   cathetus_b;
     float   hypothenuse;
 
-    cathetus_a = p_ray.x - person.x;
-    cathetus_b = p_ray.y - person.y;
+    cathetus_a = fabs(p_ray.x - person.x);
+    cathetus_b = fabs(p_ray.y - person.y);
+    printf("cat a %f  b %f \n", cathetus_a, cathetus_b);
     hypothenuse = sqrt(cathetus_a * cathetus_a + cathetus_b * cathetus_b); 
     return (hypothenuse);
 }
@@ -162,21 +163,23 @@ float   calc_distance(t_float_vector p_ray, t_float_vector person, t_float_vecto
     return(calc_hypotenuse(p_ray, person));
 }
 
-t_float_vector  parche_regla_de_tres(int x_y, t_float_vector p_ray, t_vector walls, t_float_vector direction)
+t_float_vector  parche_regla_de_tres(t_float_vector p_ray, t_vector walls, t_float_vector direction)
 {
     t_float_vector v_ray;
     v_ray.x = -42;
     v_ray.y = -42;
-    if(x_y == 0)
+    if(direction.y == 0)
     {
         v_ray.x = (float)walls.x - p_ray.x;
-        v_ray.y = (float)walls.ygit ;
+        v_ray.y = 0 ;
+        print_fvector_new(v_ray, "v_ray gg");
         return(v_ray);
     }
-    else if(x_y == 1)
+    else if(direction.x == 0)
     {
         v_ray.y = (float)walls.y - p_ray.y;
-        v_ray.x = (float)walls.x;
+        v_ray.x = 0;
+        print_fvector_new(v_ray, "v_ray gg");
         return(v_ray);
     }
     return(v_ray);
@@ -196,7 +199,7 @@ float   check_distance(t_vector walls, t_float_vector *p_ray, t_map map, int *au
     {
         err = 0;
         if (map.direction.x == 0 || map.direction.y == 0)
-            v_ray = parche_regla_de_tres(x_y, *p_ray, walls);
+            v_ray = parche_regla_de_tres(*p_ray, walls, map.direction);
         else 
             v_ray = vector_ray(x_y, *p_ray, map.direction, walls, &err);
         if(verif_walls(walls, *p_ray, v_ray) || !err)
@@ -227,10 +230,12 @@ float calc_distance_new(t_map *map)
     int aux;
 
 
-    map->person.x = 2.5;
-    map->person.y = 2.5;
+    map->person.x = 3.75;
+    map->person.y = 1.5;
     p_ray = map->person;
 
+    map->direction.x = -1.5;
+    map->direction.y = 1;
 
     aux = 0;
     while(1)
