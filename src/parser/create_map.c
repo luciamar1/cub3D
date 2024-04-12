@@ -49,16 +49,18 @@ char	*strdup_init_end(const char *s1, int len, int init)
 	char	*ret;
 	char	*ret_cpy;
 
-	ret = ft_calloc(len + 1, 1);
+	ret = ft_calloc(len + 3, 1);
 	if (ret == NULL)
 		return (ret);
 	ret_cpy = ret;
+    *(ret++) = '1';
 	while (len)
     {
 		*(ret++) = s1[init];
         init ++;
         len --;
     }
+    *(ret) = '1';
 	return (ret_cpy);
 }
 
