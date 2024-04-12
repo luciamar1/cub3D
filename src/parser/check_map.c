@@ -75,7 +75,7 @@ void    put_person_direction(t_map *map, char orientation, int prim, int seg)
         map->direction = put_orientation(0, -1);
 
     map->person.x = prim;
-    map->person.y = seg;
+    map->person.y = seg+1;
 }
 
 

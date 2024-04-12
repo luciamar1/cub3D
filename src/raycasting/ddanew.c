@@ -32,29 +32,11 @@ t_vector    calc_walls_aux1(t_float_vector person, t_float_vector direction)
     return (walls);
 }
 
-t_vector    calc_walls(t_float_vector person, t_float_vector direction, int *aux)
+t_vector    calc_walls_aux2(t_float_vector person, t_float_vector direction)
 {
     t_vector    walls;
-    
-    if(*aux == 1)
-    {
-        if (direction.x < 0)
-            walls.x = (int)person.x - 1;
-        if (direction.y < 0)
-            walls.y = (int)person.y - 1;
-        if (direction.x == 0)
-            walls.x = (int)person.x ;
-        if (direction.y == 0)
-            walls.y = (int)person.y ;
-        if (direction.x > 0)
-            walls.x = (int)person.x + 2;
-        if (direction.y > 0)
-            walls.y = (int)person.y + 2;
-        *aux = 0;
-    }
-    else
-    {
-        if (direction.x < 0)
+
+     if (direction.x < 0)
             walls.x = (int)person.x;
         if (direction.y < 0)
             walls.y = (int)person.y;
@@ -66,6 +48,21 @@ t_vector    calc_walls(t_float_vector person, t_float_vector direction, int *aux
             walls.x = (int)person.x + 1;
         if (direction.y > 0)
             walls.y = (int)person.y + 1;
+    return (walls);
+}
+
+t_vector    calc_walls(t_float_vector person, t_float_vector direction, int *aux)
+{
+    t_vector    walls;
+    
+    if(*aux == 1)
+    {
+        walls = calc_walls_aux1(person, direction);
+        *aux = 0;
+    }
+    else
+    {
+       walls = calc_walls_aux2(person, direction);
     }
     return (walls);
 }
@@ -92,7 +89,6 @@ t_float_vector  vector_ray(int  x_y, t_float_vector p_ray, t_float_vector  direc
     t_float_vector walls;
     walls.x = wall.x;
     walls.y = wall.y;
-    // wall_hit = calc_wall_hit(direction, walls);
     if (walls.x == p_ray.x && walls.y == p_ray.y)
     {
         vector_distance.x = 0;
@@ -101,7 +97,6 @@ t_float_vector  vector_ray(int  x_y, t_float_vector p_ray, t_float_vector  direc
     }
     if (x_y == 0)
     {
-        //vector_distance.x = fabs(walls.x - p_ray.x);
         vector_distance.x = (walls.x - p_ray.x);
         if(vector_distance.x == 0)
             *err = 1;
@@ -109,7 +104,6 @@ t_float_vector  vector_ray(int  x_y, t_float_vector p_ray, t_float_vector  direc
     }
     if (x_y == 1)
     {
-        //vector_distance.y = fabs(walls.y - p_ray.y);
         vector_distance.y = (walls.y - p_ray.y);
         if(vector_distance.y == 0)
             *err = 1;
@@ -129,21 +123,6 @@ int verif_walls(t_vector walls, t_float_vector p_ray,  t_float_vector  v_ray)
         return (1);
     return (0);
 }
-// t_vector    what_hit_wall(t_float_vector direction, t_float_vector p_ray)
-// {
-//     t_vector    hit_wall;
-
-//     if(direction.x < 0)
-//         hit_wall.x = p_ray.x - 1;
-//     if(direction.y < 0)
-//         hit_wall.y = p_ray.y - 1;
-
-//     if(direction.x >= 0)
-//         hit_wall.x = p_ray.x;
-//     if(direction.y >= 0)
-//         hit_wall.y = p_ray.y;
-//     return (hit_wall);
-// }
 
 t_vector    what_hit_wall(t_float_vector direction, t_float_vector p_ray)
 {
@@ -228,6 +207,9 @@ float   calc_distance(t_float_vector p_ray, t_float_vector person, t_float_vecto
     wall_hit = calc_wall_hit(direction, walls);
     if((direction).x == 0 || (direction).y == 0)
     {
+        printf("p_ray.x - person.x %f     p_ray.y - person.y %f\n", p_ray.x - person.x, p_ray.y - person.y);
+        print_fvector_new(person, "person");
+        print_fvector_new(p_ray, "p_ray");
         return(fabs((p_ray.x - person.x) + (p_ray.y - person.y)));
     }
     return(calc_hypotenuse(p_ray, person));
@@ -301,11 +283,17 @@ float calc_distance_new(t_map *map)
     int aux;
 
 
-    map->direction.x = -1;
-    map->direction.y = 1;
+    // map->direction.x = -1;
+    // map->direction.y = 1;
 
-    map->person.x = 3.75;
-    map->person.y = 1.5;
+    // map->person.x = 3.75;
+    // map->person.y = 1.5;
+
+    // map->direction.x = -1.5;
+    // map->direction.y = 1;
+
+    // map->person.x = 3.75;
+    // map->person.y = 1.5;
     p_ray = map->person;
 
 
