@@ -169,12 +169,35 @@ t_vector    what_hit_wall(t_float_vector direction, t_float_vector p_ray)
     printf("WHAT WALL\n");
     sleep(1);
     return (hit_wall);
+    }
+t_vector    corners(t_float_vector p_ray, char **map)
+{
+    t_vector wall;
+
+    wall.x = (int)p_ray.x;
+    wall.y = (int)p_ray.y;
+        map[wall.x][wall.y] = 'C';
+        print_biarr(map);
+    return(wall);
 }
 
 int verif_if_1(t_float_vector   p_ray, char **map, t_float_vector   direction)
 {
     t_vector    hit_wall;
+    print_fvector_new(p_ray, "PRAYYYYYY");
+    if ((float)(int)p_ray.x == p_ray.x && (float)(int)p_ray.y == p_ray.y)
+    {
+        printf("ESQUINAAAS\n");
+        hit_wall = corners(p_ray, map);
+        print_vector_new(hit_wall, "HIT WALLS");
+        if(map[hit_wall.x][hit_wall.y] == '1')
+            return(1);
+        return(0);
+    }
+    if(map[(int)p_ray.x][(int)p_ray.y] == '1')
+        return(1);
     hit_wall = what_hit_wall(direction, p_ray);
+    
     if(hit_wall.x == 0)
     {
         print_biarr(map);
@@ -184,6 +207,10 @@ int verif_if_1(t_float_vector   p_ray, char **map, t_float_vector   direction)
     }
     if(map[hit_wall.x][hit_wall.y] == '1')
         return(1);
+    // if(map[hit_wall.x][hit_wall.y] != '0')
+    // {
+
+    // }
     return (0);
 }
 
@@ -283,11 +310,11 @@ float calc_distance_new(t_map *map)
     int aux;
 
 
-    // map->direction.x = -1;
-    // map->direction.y = 1;
+    map->direction.x = -1;
+    map->direction.y = 1;
 
-    // map->person.x = 3.75;
-    // map->person.y = 1.5;
+    map->person.x = 1;
+    map->person.y =4;
 
     // map->direction.x = -1.5;
     // map->direction.y = 1;
