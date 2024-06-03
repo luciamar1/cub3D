@@ -215,7 +215,7 @@ float   calc_hypotenuse(t_float_vector p_ray, t_float_vector person)
 
 	cathetus_a = fabs(p_ray.x - person.x);
 	cathetus_b = fabs(p_ray.y - person.y);
-	printf("cat a %f  b %f \n", cathetus_a, cathetus_b);
+	printf("cateto a %f\ncateto b %f \n\n", cathetus_a, cathetus_b);
 	hypothenuse = sqrt(cathetus_a * cathetus_a + cathetus_b * cathetus_b); 
 	return (hypothenuse);
 }
@@ -227,9 +227,8 @@ float   calc_distance(t_float_vector p_ray, t_float_vector person, t_float_vecto
 	wall_hit = calc_wall_hit(direction, walls);
 	if((direction).x == 0 || (direction).y == 0)
 	{
-		printf("p_ray.x - person.x %f     p_ray.y - person.y %f\n", p_ray.x - person.x, p_ray.y - person.y);
-		print_fvector_new(person, "person");
-		print_fvector_new(p_ray, "p_ray");
+		printf("(cateto a) %f\n(cateto b) %f\n", p_ray.x - person.x, p_ray.y - person.y);
+		printf("\n\n");
 		return(fabs((p_ray.x - person.x) + (p_ray.y - person.y)));
 	}
 	return(calc_hypotenuse(p_ray, person));
@@ -244,7 +243,6 @@ t_float_vector  parche_regla_de_tres(t_float_vector p_ray, t_vector walls, t_flo
 	{
 		v_ray.x = (float)walls.x - p_ray.x;
 		v_ray.y = 0 ;
-		print_fvector_new(v_ray, "v_ray gg");
 		return(v_ray);
 	}
 	else if(direction.x == 0)
@@ -312,7 +310,7 @@ float calc_distance_new(t_map *map)
 	// map->person.y = 1.5;
 
 	map->direction.x = 1;
-	map->direction.y = 0;
+	map->direction.y = 0.5;
 
 	map->person.x = 1.5;
 	map->person.y = 1.5;
@@ -324,8 +322,8 @@ float calc_distance_new(t_map *map)
 	{
 		printf("\n\n");
 		walls = calc_walls(p_ray, map->direction, &aux);
-		print_vector_new(walls, "walls");
-		print_fvector_new(p_ray, "p_ray");
+		print_vector_new(walls, "walls         ");
+		print_fvector_new(p_ray, "point_last_ray");
 		distance = check_distance(walls, &p_ray, *map, &aux);
 		if (distance >= 0.0)
 			break ;
