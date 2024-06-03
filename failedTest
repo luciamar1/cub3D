@@ -1,5 +1,6 @@
 test.cub
-    map->direction.x = 1;
+    bien
+	map->direction.x = 1;
 	map->direction.y = -1;
 	map->person.x = 1.5;
 	map->person.y = 1.5;

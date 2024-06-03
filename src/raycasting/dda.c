@@ -64,6 +64,10 @@ t_vector    calc_walls(t_float_vector person, t_float_vector direction, int *aux
 	{
 	   walls = calc_walls_aux2(person, direction);
 	}
+	// if(!map[walls.x][walls.y])
+	// {
+	// 	walls.y -= 1;
+	// }
 	return (walls);
 }
 
@@ -301,7 +305,7 @@ float calc_distance_new(t_map *map)
 	t_vector    walls;
 	t_float_vector  p_ray;
 	int aux;
-
+	print_biarr(map->bimap);
 
 	// map->direction.x = -1;
 	// map->direction.y = 1;
@@ -310,7 +314,7 @@ float calc_distance_new(t_map *map)
 	// map->person.y = 1.5;
 
 	map->direction.x = 1;
-	map->direction.y = 0.5;
+	map->direction.y = -1;
 	map->person.x = 1.5;
 	map->person.y = 1.5;
 
