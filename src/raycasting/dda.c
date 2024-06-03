@@ -311,11 +311,10 @@ float calc_distance_new(t_map *map)
 
 	map->direction.x = 1;
 	map->direction.y = 0.5;
-
 	map->person.x = 1.5;
 	map->person.y = 1.5;
-	p_ray = map->person;
 
+	p_ray = map->person;
 
 	aux = 0;
 	while(1)

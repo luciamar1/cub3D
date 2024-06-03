@@ -1,0 +1,25 @@
+test.cub
+    map->direction.x = 1;
+	map->direction.y = -1;
+	map->person.x = 1.5;
+	map->person.y = 1.5;
+
+    map->direction.x = 1;
+	map->direction.y = 1;
+	map->person.x = 1.5;
+	map->person.y = 1.5;
+
+    map->direction.x = 1;
+	map->direction.y = 0.5;
+	map->person.x = 1.5;
+	map->person.y = 1.5;
+
+    map->direction.x = 1;
+	map->direction.y = 0.5;
+	map->person.x = 2;
+	map->person.y = 2;
+
+    map->direction.x = 2;
+	map->direction.y = 1;
+	map->person.x = 1.9;
+	map->person.y = 1.9;
