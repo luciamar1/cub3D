@@ -100,7 +100,7 @@ char **create_real_map(char **check, char **map)
     len_first = len_first_realmap(check, &x_init);
     real = malloc(sizeof(char *) * (len_first + 1));
     if (!real)
-        return (NULL);
+		return (NULL);
 	y_init = search_y_init(check);
     x_real = 0;
     while (len_first)

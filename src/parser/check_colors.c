@@ -8,9 +8,10 @@ int check_volume_nums(char *str)
     while (counter++ < 2)
     {
         move_to_space(&str);
-        if (ft_isdigit(*str))
+        if (ft_isdigit(*str)) {
             while (ft_isdigit(*str))
                 str ++;
+        }
 		else
 			return 0;
 		move_to_space(&str);

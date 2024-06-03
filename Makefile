@@ -14,21 +14,15 @@ SRCS := src/main/main.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
 		src/raycasting/dda.c \
-		src/raycasting/ddanew.c \
 		
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
+OBJS += mlx/libmlx_Linux.a
 
-
-# MLX		= mlx/minilibx-linux/Makefile.gen
-# CFLAGS	= -Wall -Wextra -Werror  -I cub3d.h -I libft -Imlx #-g3 -fsanitize=address
-# LIB		= -L ./libft -lft -L ./mlx/minilibx-linux -lmlx -lXext -lX11 -lm #-lbsd
-
-
-CFLAGS	= -Wall -Wextra -Werror -I libft -I src -I mlx 
-LDFLAGS	= -lmlx -framework OpenGL -framework AppKit
+CFLAGS	= -Wall -Werror -Wextra -I libft -I src -I mlx
+LDFLAGS	= -lXext -lX11 -lm -lz
 
 RM = /bin/rm -rf
 
@@ -44,7 +38,7 @@ objs:
 
 #compilar src
 objs/%.o: src/%.c | objs
-	cc $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 #enlazar objetos a OBJS
 $(NAME): $(OBJS)
@@ -54,20 +48,24 @@ $(NAME): $(OBJS)
 libft/libft.a: 
 	make -C libft
 
+mlx/libmlx_Linux.a:
+	make -C mlx
+
 #reglas de limpieza
 clean:
 	$(RM) objs
 	make fclean -C libft
+	make clean -C mlx
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
 
-#malloc debug flags#
 fclean_nolib:
 	$(RM) objs
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
+#malloc debug flags#
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
 malloc_debug: $(OBJS) objs/debug/malloc_debug.o

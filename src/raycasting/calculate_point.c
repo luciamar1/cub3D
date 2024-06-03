@@ -36,7 +36,6 @@ float   calculate_hit_point(t_vector    hit_index, t_float_vector person, t_floa
     t_float_vector  cathetus;
     float           hypotenuse;
 
-
     printf("hit index == %d %d     %d\n", hit_index.x, hit_index.y, x_y);
     if(x_y == 0)
     {
