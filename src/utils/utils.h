@@ -17,6 +17,7 @@ char **strdup_bi(char **str);
 void    print_error(char *message);
 int	ft_atoi_better(const char *str, int *error);
 int	is_digit_space_str(char *str);
+void	**alloc_biarr(int dim1, int dim2);
 
 
 #endif

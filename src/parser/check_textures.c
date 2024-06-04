@@ -1,21 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 17:59:42 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/04 18:35:42 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void    *check_textures(char   *str_doc, int *err_doc, t_doc *doc, int *textures)
+static int	**create_texture(char *data)
 {
-    void    *img;
-    int     size;
+	int	**ret;
+	int	c1;
+	int c2;
 
-    size = SIZE;
-    str_doc += 2;
-    move_to_space(&str_doc);
-    img = mlx_xpm_file_to_image(doc->program.mlx_pointer, str_doc, &size, &size);
-    if (!img)
-        return((*err_doc = -1), img);
-    *textures = 1;
-    return(img);
+	ret = (int**) alloc_biarr(IMAGESIZE, IMAGESIZE * 4);
+	if (!ret)
+		return (NULL);
+	c1 = 0;
+	while (c1 < IMAGESIZE) {
+		c2 = 0;
+		while (c2 < IMAGESIZE) {
+			ret[c2][c1] = data[(c1 * IMAGESIZE + c2) * 4] << 24;
+			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 1] << 16;
+			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 2] << 8;
+			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 3] << 0;
+			c2++;
+		}
+		c1++;
+	}
+	return (ret);
 }
 
-int clasificate_textures(char   *str_doc, int *err_doc, t_doc *doc, int *textures)
+//return the textures as a matrix BY COLUMNS
+//(convinient, bc we will paint by columns)
+int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
+{
+	void	*img;
+	char	*data;
+	int		height;
+	int		width;
+	int		**ret;
+
+	str_doc += 2;
+	move_to_space(&str_doc);
+	img = mlx_xpm_file_to_image(doc->program.mlx_pointer, str_doc, &width, &height);
+	if (!img || width != IMAGESIZE || height != IMAGESIZE)
+		return ((*err_doc = -1), NULL);
+	data = mlx_get_data_addr(img, &width, &width, &width);
+	if (!data)
+		return (mlx_destroy_image(doc->program.mlx_pointer, img), (*err_doc = -1), NULL);
+	ret = create_texture(data);
+	mlx_destroy_image(doc->program.mlx_pointer, img);
+	if (!ret)
+		return ((*err_doc = -1), NULL);
+	*textures = 1;
+	return (ret);
+}
+
+int clasificate_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {       
     if(!ft_strncmp(str_doc, "NO ", 3) && !textures[2])
         return ((doc->textures.no = check_textures(str_doc, err_doc, doc, &textures[2])), 1);
@@ -36,7 +83,7 @@ int clasificate_textures(char   *str_doc, int *err_doc, t_doc *doc, int *texture
     return(0);
 }
 
-int try_textures(char   *str_doc, int *err_doc, t_doc *doc, int *textures)
+int try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
     int ret;
 

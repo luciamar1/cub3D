@@ -14,6 +14,8 @@ SRCS := src/main/main.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
 		src/raycasting/dda.c \
+		src/game/keypress.c \
+		src/game/render.c \
 		
 
 # Archivos objeto
@@ -21,7 +23,7 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 OBJS += mlx/libmlx_Linux.a
 
-CFLAGS	= -Wall -Wextra -I libft -I src -I mlx #-Werror
+CFLAGS	= -Wall -Wextra -Werror -I libft -I src -I mlx
 LDFLAGS	= -lXext -lX11 -lm -lz
 
 RM = /bin/rm -rf
@@ -35,21 +37,24 @@ objs:
 				objs/parser	\
 				objs/utils	\
 				objs/raycasting	\
+				objs/game
 
 #compilar src
 objs/%.o: src/%.c | objs
-	$(CC) $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 #enlazar objetos a OBJS
 $(NAME): $(OBJS)
 	cc $(LDFLAGS) $(OBJS) -o $(NAME)
 
 #regla de compilacion libft
-libft/libft.a: 
-	make -C libft
+libft/libft.a:
+	@echo compiling libft...
+	@make -C libft > /dev/null
 
 mlx/libmlx_Linux.a:
-	make -C mlx
+	@echo compiling mlx...
+	@make -C mlx 2> /dev/null > /dev/null
 
 #reglas de limpieza
 clean:

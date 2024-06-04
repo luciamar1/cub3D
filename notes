@@ -1,0 +1,6 @@
+TODO
+- necesito distancia, punto exacto de colision, si el punto tiene valor entero en x, es textura N (90 < theta < 270) o S (else)
+
+
+NOTES
+- colors in little endian (al reves)

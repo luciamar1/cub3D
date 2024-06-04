@@ -58,3 +58,25 @@ void print_biarr(char **str)
 		str++;
 	}
 }
+
+void	**alloc_biarr(int dim1, int dim2) {
+	void	**ret;
+	int		cnt;
+
+	cnt = 0;
+	ret = malloc(dim1 * 8);
+	if (!ret)
+		return (NULL);
+	while (cnt < dim1)
+	{
+		ret[cnt] = malloc(dim2);
+		if (!ret[cnt]) {
+			while (cnt > 0)
+				free(ret[--cnt]);
+			free(ret);
+			return (NULL);
+		}
+		cnt++;
+	}
+	return (ret);
+}

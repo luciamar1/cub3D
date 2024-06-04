@@ -7,8 +7,6 @@ int check_extension(char *document)
     return (1);
 }
 
-
-
 t_doc   parser(int argc, char **argv, int *err_parser)
 {
     char    **strbi_doc;
