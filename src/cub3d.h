@@ -8,10 +8,13 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+# include <mlx_int.h>
 # include "libft.h"
 # include "utils/utils.h"
 # include "parser/parser.h"
 # include "raycasting/raycasting.h"
 # include "game/game.h"
+
+# define WINDOW_SIZE	1500
 
 #endif

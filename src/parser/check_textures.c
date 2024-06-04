@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:59:42 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 18:35:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/04 20:02:33 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ static int	**create_texture(char *data)
 	while (c1 < IMAGESIZE) {
 		c2 = 0;
 		while (c2 < IMAGESIZE) {
-			ret[c2][c1] = data[(c1 * IMAGESIZE + c2) * 4] << 24;
-			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 1] << 16;
-			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 2] << 8;
-			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 3] << 0;
+			ret[c2][c1] = data[(c1 * IMAGESIZE + c2) * 4] << 0;
+			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 1] << 8;
+			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 2] << 16;
 			c2++;
 		}
 		c1++;

@@ -1,6 +1,8 @@
 TODO
 - necesito distancia, punto exacto de colision, si el punto tiene valor entero en x, es textura N (90 < theta < 270) o S (else)
-
+- pensar que hacer si la imagen falla al generarse (probablemente printear error pero no salir)
 
 NOTES
-- colors in little endian (al reves)
+- colors in input little endian (al reves)
+- colors in output big endian
+- ahora mismo, los rayos y el tamaño de la pantalla tienen que coincidir

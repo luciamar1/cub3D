@@ -34,16 +34,10 @@ int keypress(int keycode, t_doc *doc)
 	else if (keycode == D)
 		move(-1 * doc->map.direction.y, doc->map.direction.x, &(doc->map.person), doc->map.bimap);
 	else if (keycode == RIGHT || keycode == LEFT) {
-		if (keycode == RIGHT) {
-			doc->map.angle -= ROTATE;
-			while (doc->map.angle < 0)
-				doc->map.angle += 360;
-		}
-		if (keycode == LEFT) {
-			doc->map.angle += ROTATE;
-			while (doc->map.angle >= 360)
-				doc->map.angle -= 360;
-		}
+		if (keycode == RIGHT)
+			doc->map.angle = add_angle(doc->map.angle, -1 * ROTATE);
+		if (keycode == LEFT)
+			doc->map.angle = add_angle(doc->map.angle, ROTATE);
 		angleToDirection(doc->map.angle, &(doc->map.direction));
 		printf("angle: %f, dir: %f, %f\n", doc->map.angle, doc->map.direction.x, doc->map.direction.y);
 	}
