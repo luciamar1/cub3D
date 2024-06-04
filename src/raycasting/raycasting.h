@@ -14,7 +14,7 @@ typedef struct s_map
 {
 	t_float_vector	person;
 	t_float_vector	direction;
-	float			distance;
+    float           angle;      //in degrees, 0 is looking south
 	char			**bimap;
 }				t_map;
 

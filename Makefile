@@ -2,7 +2,7 @@
 NAME := cub3D
 
 # Archivos fuente principales
-SRCS := src/main/main.c \
+SRCS := src/main/main2.c \
 		src/parser/check_colors.c \
 		src/parser/check_map.c \
 		src/parser/create_map.c \
@@ -21,7 +21,7 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 OBJS += mlx/libmlx_Linux.a
 
-CFLAGS	= -Wall -Werror -Wextra -I libft -I src -I mlx
+CFLAGS	= -Wall -Wextra -I libft -I src -I mlx #-Werror
 LDFLAGS	= -lXext -lX11 -lm -lz
 
 RM = /bin/rm -rf

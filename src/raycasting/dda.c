@@ -226,9 +226,9 @@ float   calc_hypotenuse(t_float_vector p_ray, t_float_vector person)
 
 float   calc_distance(t_float_vector p_ray, t_float_vector person, t_float_vector direction, t_vector walls)
 {
-	t_float_vector wall_hit;
+	/*t_float_vector wall_hit;
 
-	wall_hit = calc_wall_hit(direction, walls);
+	wall_hit =*/ calc_wall_hit(direction, walls);
 	if((direction).x == 0 || (direction).y == 0)
 	{
 		printf("(cateto a) %f\n(cateto b) %f\n", p_ray.x - person.x, p_ray.y - person.y);

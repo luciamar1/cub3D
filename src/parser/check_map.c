@@ -9,7 +9,7 @@ int is_orientation(char orientation)
 }
 int recursive_function(char **map, size_t x, size_t y)
 {
-    if (x < 0 || !map[x] || ft_strlen(map[x]) <= y || y < 0)
+    if (!map[x] || ft_strlen(map[x]) <= y )
         return (0);
     if (map[x][y] == 'C')
         return 1;
@@ -65,14 +65,22 @@ t_float_vector  put_orientation(int x, int y)
 
 void    put_person_direction(t_map *map, char orientation, int prim, int seg)
 {
-    if(orientation == 'N')
+    if (orientation == 'N') {
         map->direction = put_orientation(-1, 0);
-    if(orientation == 'S')
+        map->angle = 180;
+    }
+    else if (orientation == 'S') {
         map->direction = put_orientation(1, 0);
-    if(orientation == 'E')
+        map->angle = 0;
+    }
+    else if (orientation == 'E') {
         map->direction = put_orientation(0, 1);
-    if(orientation == 'W')
+        map->angle = 90;
+    }
+    else if (orientation == 'W') {
         map->direction = put_orientation(0, -1);
+        map->angle = 270;
+    }
 
     map->person.x = prim;
     map->person.y = seg;

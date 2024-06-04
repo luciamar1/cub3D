@@ -53,7 +53,6 @@ typedef struct s_doc
     t_map       map;
 } t_doc;
 
-
 //parser
 t_doc   parser(int argc, char **argv, int *err);
 t_doc check_create_document(char **str_doc, int *err);
