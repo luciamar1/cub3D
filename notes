@@ -1,8 +1,6 @@
 TODO
 - necesito distancia, punto exacto de colision, si el punto tiene valor entero en x, es textura N (90 < theta < 270) o S (else)
 - pensar que hacer si la imagen falla al generarse (probablemente printear error pero no salir)
-- gestionar distancias demasiado pequeñas a la hora de calcular el size
-- gestionar distancias menos de 1 en el render
 
 NOTES
 - colors in input little endian (al reves)

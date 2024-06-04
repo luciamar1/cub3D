@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 22:42:21 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:53:40 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ float	add_angle(float angle, float toAdd) {
 	return angle;
 }
 
-void printi(int* a) {
-	for (int i = 0; i < IMAGESIZE; i++)
-		printf("%d ", a[i]);
-	printf("\n");
-}
-
 void	paint_col(t_img *image, t_float_vector colision, float distance, int** texture, int n, t_doc *doc) {
 	int			*pixels;
 	long long	size;
@@ -48,6 +42,8 @@ void	paint_col(t_img *image, t_float_vector colision, float distance, int** text
 	else
 		pixels = pixel_col(texture, colision.x - (int) colision.x);
 	size = WINDOW_SIZE / distance;
+	if (distance < 0.00000001)
+		size = LONG_MAX;
 	for (int i = 0; i < WINDOW_SIZE; i++)
 	{
 		if (i < WINDOW_SIZE / 2 - size / 2)
@@ -62,7 +58,7 @@ void	paint_col(t_img *image, t_float_vector colision, float distance, int** text
 void	render(t_doc* doc) {
 	t_float_vector	colision;
 	float			distance;
-	int				curr_angle;
+	float			curr_angle;
 	int				cnt;
 	t_img*			image;
 

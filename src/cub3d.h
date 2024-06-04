@@ -14,6 +14,7 @@
 # include "parser/parser.h"
 # include "raycasting/raycasting.h"
 # include "game/game.h"
+# include <limits.h>
 
 # define WINDOW_SIZE	1500
 
