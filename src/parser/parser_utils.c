@@ -23,23 +23,6 @@ int move_to_space(char **str)
     return (ret);
 }
 
-void    put_value_color(t_colors *colors, int value, char   type)
-{
-    if(type == 'c' || type == 't')
-    {
-        colors->ceiling.r = value;
-        colors->ceiling.g = value;
-        colors->ceiling.b = value;
-    }
-
-    if (type == 'f' || type == 't')
-    {
-        colors->floor.r = value;
-        colors->floor.g = value;
-        colors->floor.b = value;
-    }
-}
-
 int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n)
 {
 	int	len;

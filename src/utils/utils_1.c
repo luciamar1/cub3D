@@ -28,8 +28,8 @@ char	*ft_strjoin_better(char **s1, char **s2)
 void	print_doc(t_doc doc)
 {
 	printf("\n\nDOC:\n\n");
-	printf("   color ceiling == %d, %d , %d\n", doc.colors.ceiling.r, doc.colors.ceiling.g, doc.colors.ceiling.b);
-	printf("   color floor == %d, %d , %d\n\n", doc.colors.floor.r, doc.colors.floor.g, doc.colors.floor.b);
+	printf("   color ceiling == %d, %d , %d\n", (unsigned char) (doc.colors.ceiling >> 16), (unsigned char) (doc.colors.ceiling >> 8), (unsigned char) (doc.colors.ceiling));
+	printf("   color floor == %d, %d , %d\n\n", (unsigned char) (doc.colors.floor >> 16), (unsigned char) (doc.colors.floor >> 8), (unsigned char) (doc.colors.floor));
 	printf("\n\nMAP\n");
 	print_biarr(doc.map.bimap);
 }

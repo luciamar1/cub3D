@@ -30,7 +30,7 @@ int check_volume_nums(char *str)
 	return (*str == 0);
 }
 
-int put_rgb(char **nums, t_rgb *doc_rgb, int *color)
+int put_rgb(char **nums, int *doc_rgb, int *color)
 {
     int counter;
     int rgb[3];
@@ -49,14 +49,14 @@ int put_rgb(char **nums, t_rgb *doc_rgb, int *color)
         counter ++;
         nums ++;
     }
-    doc_rgb->r = rgb[0];
-    doc_rgb->g = rgb[1];
-    doc_rgb->b = rgb[2];
+    *doc_rgb = rgb[2];
+    *doc_rgb += rgb[1] << 8;
+    *doc_rgb += rgb[0] << 16;
     color[0] = 1;
     return(1);
 }
 
-void   check_rgb(char *str, int *err_doc, t_rgb *doc_rgb, int *colors)
+void   check_rgb(char *str, int *err_doc, int *doc_rgb, int *colors)
 {
     char **nums;
 
@@ -76,7 +76,7 @@ void   check_rgb(char *str, int *err_doc, t_rgb *doc_rgb, int *colors)
         *err_doc = -1;
 }
 
-int    try_colors(char   *str_doc, int *err_doc, t_doc *doc, int *colors)
+int	try_colors(char *str_doc, int *err_doc, t_doc *doc, int *colors)
 {
     if (!ft_strncmp(str_doc, "C ", 2) && !colors[0])
        return ((check_rgb(str_doc + 1, err_doc, &(doc->colors.ceiling), &colors[0])), 1);

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:07:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 18:08:44 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:12:51 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@ typedef struct s_textures
 	int	**ea;
 }	t_textures;
 
-typedef struct s_rgb
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb;
-
 typedef struct s_colors
 {
-	t_rgb	ceiling;
-	t_rgb	floor;
+	int	ceiling;
+	int	floor;
 }	t_colors;
 
 typedef struct s_doc
@@ -70,7 +63,6 @@ int		move_to_space(char **str);
 char	**read_document(char *extension);
 int		try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures);
 char	**create_real_map(char **check, char **map);
-void	put_value_color(t_colors *colors, int value, char type);
 int		ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
 
 #endif
