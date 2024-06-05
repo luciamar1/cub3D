@@ -2,7 +2,7 @@
 NAME := cub3D
 
 # Archivos fuente principales
-SRCS := src/main/main.c \
+SRCS := src/main/main2.c \
 		src/parser/check_colors.c \
 		src/parser/check_map.c \
 		src/parser/create_map.c \

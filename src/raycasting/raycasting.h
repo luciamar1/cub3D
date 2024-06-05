@@ -19,5 +19,5 @@ typedef struct s_map
 }				t_map;
 
 float calculate_distance(t_map *map);
-float calc_distance_new(t_map *map);
+float calc_distance_new(t_map *map, t_float_vector *p_ray, t_float_vector direction);
 #endif

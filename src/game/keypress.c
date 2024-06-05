@@ -8,10 +8,13 @@ int	close_win(t_doc *doc)
 	exit(0);
 }
 
-void	angleToDirection(float angle, t_float_vector *v)
+t_float_vector	angleToDirection(float angle)
 {
-	v->x = cosf(angle * 2 * M_PI / 360);
-	v->y = sinf(angle * 2 * M_PI / 360);
+	t_float_vector v;
+
+	v.x = cosf(angle * 2 * M_PI / 360);
+	v.y = sinf(angle * 2 * M_PI / 360);
+	return (v);
 }
 
 void	move(float x, float y, t_float_vector* person, char** map) 
@@ -38,7 +41,7 @@ int keypress(int keycode, t_doc *doc)
 			doc->map.angle = add_angle(doc->map.angle, -1 * ROTATE);
 		if (keycode == LEFT)
 			doc->map.angle = add_angle(doc->map.angle, ROTATE);
-		angleToDirection(doc->map.angle, &(doc->map.direction));
+		doc->map.direction = angleToDirection(doc->map.angle);
 		printf("angle: %f, dir: %f, %f\n", doc->map.angle, doc->map.direction.x, doc->map.direction.y);
 	}
 	else if (keycode == ESC)

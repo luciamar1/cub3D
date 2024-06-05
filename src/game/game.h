@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:40:56 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 21:37:00 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/04 23:53:03 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@
 # define DOWN		65364
 # define RIGHT		65363
 
-int		keypress(int keycode, t_doc *doc);
-int		close_win(t_doc *doc);
-float	add_angle(float angle, float toAdd);
-void	render(t_doc *doc);
+int				keypress(int keycode, t_doc *doc);
+t_float_vector	angleToDirection(float angle);
+int				close_win(t_doc *doc);
+float			add_angle(float angle, float toAdd);
+void			render(t_doc *doc);
 
 #endif

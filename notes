@@ -1,6 +1,7 @@
 TODO
-- necesito distancia, punto exacto de colision, si el punto tiene valor entero en x, es textura N (90 < theta < 270) o S (else)
-- pensar que hacer si la imagen falla al generarse (probablemente printear error pero no salir)
+- ver si puede estar mal, o si necesitan randf
+	- 'put_pixel(image, pixels[(int) ((i - WINDOW_SIZE / 2 + size / 2) * IMAGESIZE / size)], i, n);'
+	- texture[(int) (IMAGESIZE * colision)] 
 
 NOTES
 - colors in input little endian (al reves)
