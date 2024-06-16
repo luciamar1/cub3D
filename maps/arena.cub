@@ -1,9 +1,9 @@
 C 76,10,123
 F 48,44,52
-WE ./xpm/wall_north.xpm
-SO ./xpm/wall_north.xpm
 NO ./xpm/wall_north.xpm
-EA ./xpm/wall_north.xpm
+SO ./xpm/wall_south.xpm
+EA ./xpm/wall_east.xpm
+WE ./xpm/wall_west.xpm
 
                               11111111
                         11111100000000111111

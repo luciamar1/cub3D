@@ -29,6 +29,7 @@ typedef struct s_minilib
 {
 	void	*mlx_pointer;
 	void	*window;
+	void	*image;
 }	t_minilib;
 
 typedef struct s_textures

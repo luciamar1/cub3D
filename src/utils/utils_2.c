@@ -2,7 +2,7 @@
 
 void    print_error(char *message)
 {
-    while(*message)
+    while (*message)
         write(2, message++, 1);
 }
 
@@ -33,7 +33,7 @@ int	ft_atoi_better(const char *str, int *error)
 	return (*error = 0, ret);
 }
 
-void	free_biarr(char **fr)
+void	free_biarr(void **fr)
 {
 	int	counter;
 
@@ -47,6 +47,19 @@ void	free_biarr(char **fr)
 		}
 		free(fr);
 	}
+}
+
+void	free_biarr_int(void **fr, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(fr[i]);
+		i++;
+	}
+	free(fr);
 }
 
 void print_biarr(char **str)

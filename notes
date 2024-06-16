@@ -1,7 +1,8 @@
 TODO
-- ver si puede estar mal, o si necesitan randf
-	- 'put_pixel(image, pixels[(int) ((i - WINDOW_SIZE / 2 + size / 2) * IMAGESIZE / size)], i, n);'
-	- texture[(int) (IMAGESIZE * colision)] 
+
+- leaks (arreglar movimiento de puntero de los dobles punteros en move to space)
+- colisiones
+- norm
 
 NOTES
 - colors in input little endian (al reves)

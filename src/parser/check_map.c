@@ -7,6 +7,7 @@ int is_orientation(char orientation)
         return (1);
     return (0);
 }
+
 int recursive_function(char **map, size_t x, size_t y)
 {
     if (!map[x] || ft_strlen(map[x]) <= y )
@@ -81,13 +82,30 @@ void    put_person_direction(t_map *map, char orientation, int prim, int seg)
         map->direction = put_orientation(0, -1);
         map->angle = 270;
     }
-
     map->person.x = prim + 0.5;
     map->person.y = seg + 0.5;
 }
 
+void	place_person(char **map, t_map *map_params)
+{
+	int prim;
+	int seg;
 
-int verif_characters(char **map, t_map *map_params)
+	prim = 0;
+	while (map[prim])
+	{
+		seg = 0;
+		while(map[prim][seg])
+		{
+			if (is_orientation(map[prim][seg]))
+				put_person_direction(map_params, map[prim][seg], prim, seg);
+			seg++;
+		}
+		prim++;
+	}
+}
+
+int verif_characters(char **map)
 {
     int person;
     int prim;
@@ -95,24 +113,17 @@ int verif_characters(char **map, t_map *map_params)
 
 	prim = 0;
     person = 0;
-    while(map[prim])
+    while (map[prim])
     {
         seg = 0;
         while(map[prim][seg])
         {
-            if(map[prim][seg] == '1' || map[prim][seg] == '0' \
-            || map[prim][seg] == 0x20  || is_orientation(map[prim][seg]))
-            {
-                if (map[prim][seg] == 0x20)
-                    map[prim][seg] = '0';
-                if (is_orientation(map[prim][seg]))
-                {
-                    put_person_direction(map_params, map[prim][seg], prim, seg);
-                    person ++;
-                }
-            }
-            else 
-                return (0);
+			if (map[prim][seg] == 0x20)
+				map[prim][seg] = '0';
+			else if (is_orientation(map[prim][seg]))
+				person++;
+			else if (!(map[prim][seg] == '1' || map[prim][seg] == '0'))
+				return (0);
             seg ++;
         }
 		prim++;
@@ -122,23 +133,22 @@ int verif_characters(char **map, t_map *map_params)
 
 int check_map(t_doc *doc)
 {
-    char **aux;
-    char **real_map;
+    char	**aux;
+    char	**real_map;
 
-    if(!verif_characters(doc->map.bimap, &(doc->map)))
+    if (!verif_characters(doc->map.bimap))
         return (print_error("invalid characters\n"), 0);
     aux = strdup_bi(doc->map.bimap);
     if (!aux)
         return (print_error("malloc fail\n"), 0);
-    if(!verify_if_close(aux))
-        return (print_error("map not closed\n"), free_biarr(aux), 0);
+    if (!verify_if_close(aux))
+        return (print_error("map not closed\n"), free_biarr((void**) aux), 0);
     real_map = create_real_map(aux, doc->map.bimap);
-    free_biarr(aux);
-    free_biarr(doc->map.bimap);
-    if(!real_map)
+    free_biarr((void**) aux);
+    free_biarr((void**) doc->map.bimap);
+    if (!real_map)
         return (print_error("malloc fail\n"), 0);
     doc->map.bimap = real_map;
-
-    
+	place_person(doc->map.bimap, &(doc->map));
     return (1);
 }

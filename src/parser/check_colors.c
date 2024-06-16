@@ -16,7 +16,7 @@ int check_volume_nums(char *str)
 			return 0;
 		move_to_space(&str);
         if (*str == ',')
-            str ++;
+            str++;
 		else
 			return 0;
     }
@@ -32,13 +32,13 @@ int check_volume_nums(char *str)
 
 int put_rgb(char **nums, int *doc_rgb, int *color)
 {
-    int counter;
-    int rgb[3];
-    int atoi_err;
+    int	counter;
+    int	rgb[3];
+    int	atoi_err;
 
     counter = 0;
     atoi_err = 0;
-    while(*nums)
+    while (*nums)
     {
         move_to_space(nums);
         rgb[counter] = ft_atoi_better(*nums, &atoi_err);
@@ -67,13 +67,14 @@ void   check_rgb(char *str, int *err_doc, int *doc_rgb, int *colors)
         return ;
     }
     nums = ft_split(str, ',');
-    if(!nums)
+    if (!nums)
     {
         *err_doc = -1;
         return ;
     }
     if (!put_rgb(nums, doc_rgb, colors))
-        *err_doc = -1;
+		*err_doc = -1;
+	//free_biarr((void **) nums);
 }
 
 int	try_colors(char *str_doc, int *err_doc, t_doc *doc, int *colors)

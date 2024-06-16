@@ -23,7 +23,7 @@ t_doc   parser(int argc, char **argv, int *err_parser)
     if(!strbi_doc)
         return((print_error("doc cant be read\n")), (*err_parser = 1), doc);
     doc = check_create_document(strbi_doc, &err);
-    free_biarr(strbi_doc);
+    free_biarr((void**) strbi_doc);
     if (err)
         return((*err_parser = 1), doc);
     //print_biarr(doc.map);

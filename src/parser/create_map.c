@@ -108,7 +108,7 @@ char **create_real_map(char **check, char **map)
 		real[x_real] = strdup_init_end(map[x_init], \
 			len_sec_realmap(check[x_init], y_init), y_init);
 		if (!real[x_real])
-            return(free_biarr(real), NULL);
+            return(free_biarr((void**) real), NULL);
         x_init ++;
         x_real ++;
         len_first --;

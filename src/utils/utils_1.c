@@ -62,7 +62,7 @@ char **strdup_bi(char **str)
 	{
 		ret[counter] = ft_strdup(str[counter]);
 		if(!ret[counter])
-			return(free_biarr(ret), NULL);
+			return(free_biarr((void**) ret), NULL);
 		counter ++;
 		len_bi --;
 	}

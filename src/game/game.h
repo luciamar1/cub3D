@@ -15,10 +15,9 @@
 
 #include "../parser/parser.h"
 
-# define MOVE       0.1 //cuadrados por pulsacion
+# define MOVE       0.2 //cuadrados por pulsacion
 # define ROTATE     5   //grados por pulsacion
-# define RAYS       1500 //numero de rayos
-# define VISION     120 //grados de vision
+# define VISION     110 //grados de vision
 
 # define ESC		65307
 # define W		    119
@@ -26,9 +25,7 @@
 # define S		    115
 # define D		    100
 
-# define UP		    65362
 # define LEFT		65361
-# define DOWN		65364
 # define RIGHT		65363
 
 int				keypress(int keycode, t_doc *doc);
