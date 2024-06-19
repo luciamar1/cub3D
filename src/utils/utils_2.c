@@ -1,9 +1,9 @@
 #include "cub3d.h"
 
-void    print_error(char *message)
+void	print_error(char *message)
 {
-    while (*message)
-        write(2, message++, 1);
+	while (*message)
+		write(2, message++, 1);
 }
 
 int	ft_atoi_better(const char *str, int *error)
@@ -62,17 +62,18 @@ void	free_biarr_int(void **fr, int size)
 	free(fr);
 }
 
-void print_biarr(char **str)
+void	print_biarr(char **str)
 {
-	while(*str)
+	while (*str)
 	{
-		if(**str)
+		if (**str)
 			printf("str == %s\n", *str);
 		str++;
 	}
 }
 
-void	**alloc_biarr(int dim1, int dim2) {
+void	**alloc_biarr(int dim1, int dim2)
+{
 	void	**ret;
 	int		cnt;
 
@@ -83,7 +84,8 @@ void	**alloc_biarr(int dim1, int dim2) {
 	while (cnt < dim1)
 	{
 		ret[cnt] = malloc(dim2);
-		if (!ret[cnt]) {
+		if (!ret[cnt])
+		{
 			while (cnt > 0)
 				free(ret[--cnt]);
 			free(ret);

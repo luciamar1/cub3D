@@ -1,22 +1,25 @@
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
 
-#include "../cub3d.h"
-
+# include "../cub3d.h"
 
 typedef struct s_float_vector
 {
 	float	x;
 	float	y;
-}				t_float_vector;
+}	t_fvector;
 
 typedef struct s_map
 {
-	t_float_vector	person;
-	t_float_vector	direction;
-    float           angle;      //in degrees, 0 is looking south
-	char			**bimap;
-}				t_map;
+	t_fvector	person;
+	t_fvector	direction;
+	float		angle; // in degrees, 0 is looking south
+	char		**bimap;
+}	t_map;
 
-float	ray(t_map map, t_float_vector *colision, t_float_vector direction);
+t_fvector	next_check(t_fvector start, t_fvector direction);
+int			is_wall(t_fvector collision, t_fvector direction, char **bimap);
+float		ray(t_map map, t_fvector *colision, t_fvector direction);
+int			raymove(t_map map, t_fvector direction, t_fvector final);
+
 #endif

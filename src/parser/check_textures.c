@@ -16,15 +16,17 @@ static int	**create_texture(char *data)
 {
 	int	**ret;
 	int	c1;
-	int c2;
+	int	c2;
 
-	ret = (int**) alloc_biarr(IMAGESIZE, IMAGESIZE * 4);
+	ret = (int **) alloc_biarr(IMAGESIZE, IMAGESIZE * 4);
 	if (!ret)
 		return (NULL);
 	c1 = 0;
-	while (c1 < IMAGESIZE) {
+	while (c1 < IMAGESIZE)
+	{
 		c2 = 0;
-		while (c2 < IMAGESIZE) {
+		while (c2 < IMAGESIZE)
+		{
 			ret[c2][c1] = data[(c1 * IMAGESIZE + c2) * 4] << 0;
 			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 1] << 8;
 			ret[c2][c1] += data[(c1 * IMAGESIZE + c2) * 4 + 2] << 16;
@@ -41,20 +43,23 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
 	void	*img;
 	char	*data;
-	int		height;
-	int		width;
+	int		hei;
+	int		wid;
 	int		**ret;
 
 	str_doc += 2;
 	move_to_space(&str_doc);
-	img = mlx_xpm_file_to_image(doc->program.mlx_pointer, str_doc, &width, &height);
-	if (!img || width != IMAGESIZE || height != IMAGESIZE)
+	img = mlx_xpm_file_to_image(doc->program.mlx_ptr, str_doc, &wid, &hei);
+	if (!img || wid != IMAGESIZE || hei != IMAGESIZE)
 		return ((*err_doc = -1), NULL);
-	data = mlx_get_data_addr(img, &width, &width, &width);
+	data = mlx_get_data_addr(img, &wid, &wid, &wid);
 	if (!data)
-		return (mlx_destroy_image(doc->program.mlx_pointer, img), (*err_doc = -1), NULL);
+	{
+		mlx_destroy_image(doc->program.mlx_ptr, img);
+		return ((*err_doc = -1), NULL);
+	}
 	ret = create_texture(data);
-	mlx_destroy_image(doc->program.mlx_pointer, img);
+	mlx_destroy_image(doc->program.mlx_ptr, img);
 	if (!ret)
 		return ((*err_doc = -1), NULL);
 	*textures = 1;
@@ -62,31 +67,43 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 }
 
 int clasificate_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
-{       
-    if(!ft_strncmp(str_doc, "NO ", 3) && !textures[2])
-        return ((doc->textures.no = check_textures(str_doc, err_doc, doc, &textures[2])), 1);
-    else
-        *err_doc += 1;
-    if(!ft_strncmp(str_doc, "SO ", 3) && !textures[3])
-        return ((doc->textures.so = check_textures(str_doc, err_doc, doc, &textures[3])), 1);
-    else
-        *err_doc += 1;
-    if(!ft_strncmp(str_doc, "WE ", 3) && !textures[4])
-        return ((doc->textures.we = check_textures(str_doc, err_doc, doc, &textures[4])), 1);
-    else
-        *err_doc += 1;
-    if(!ft_strncmp(str_doc, "EA ", 3) && !textures[5])
-        return ((doc->textures.ea = check_textures(str_doc, err_doc, doc, &textures[5])), 1);
-    else
-        *err_doc += 1;
-    return(0);
+{
+	if (!ft_strncmp(str_doc, "NO ", 3) && !textures[2])
+	{
+		doc->textures.no = check_textures(str_doc, err_doc, doc, &textures[2]);
+		return (1);
+	}
+	else
+		*err_doc += 1;
+	if (!ft_strncmp(str_doc, "SO ", 3) && !textures[3])
+	{
+		doc->textures.so = check_textures(str_doc, err_doc, doc, &textures[3]);
+		return (1);
+	}
+	else
+		*err_doc += 1;
+	if (!ft_strncmp(str_doc, "WE ", 3) && !textures[4])
+	{
+		doc->textures.we = check_textures(str_doc, err_doc, doc, &textures[4]);
+		return (1);
+	}
+	else
+		*err_doc += 1;
+	if (!ft_strncmp(str_doc, "EA ", 3) && !textures[5])
+	{
+		doc->textures.ea = check_textures(str_doc, err_doc, doc, &textures[5]);
+		return (1);
+	}
+	else
+		*err_doc += 1;
+	return (0);
 }
 
 int try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
-    int ret;
+	int ret;
 
-    move_to_space(&str_doc);
-    ret = clasificate_textures(str_doc, err_doc, doc, textures);
-    return (ret);
+	move_to_space(&str_doc);
+	ret = clasificate_textures(str_doc, err_doc, doc, textures);
+	return (ret);
 }

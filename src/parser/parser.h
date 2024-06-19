@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 14:07:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 22:12:51 by mde-arpe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "libft.h"
 # include "../cub3d.h"
+# include "libft.h"
 # include "raycasting/raycasting.h"
 
-# define IMAGESIZE	64 //expected image size, if the real image size doesnt match, throw an error
+# define IMAGESIZE 64
 
 typedef struct s_vector
 {
@@ -27,7 +15,7 @@ typedef struct s_vector
 
 typedef struct s_minilib
 {
-	void	*mlx_pointer;
+	void	*mlx_ptr;
 	void	*window;
 	void	*image;
 }	t_minilib;
@@ -54,7 +42,7 @@ typedef struct s_doc
 	t_map		map;
 }	t_doc;
 
-//parser
+// parser
 t_doc	parser(int argc, char **argv, int *err);
 t_doc	check_create_document(char **str_doc, int *err);
 int		try_colors(char *str_doc, int *err_doc, t_doc *doc, int *colors);

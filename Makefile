@@ -2,7 +2,7 @@
 NAME := cub3D
 
 # Archivos fuente principales
-SRCS := src/main/main2.c \
+SRCS := src/main/main.c \
 		src/parser/check_colors.c \
 		src/parser/check_map.c \
 		src/parser/create_map.c \
@@ -14,6 +14,7 @@ SRCS := src/main/main2.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
 		src/raycasting/dda.c \
+		src/raycasting/ddaaux.c \
 		src/game/keypress.c \
 		src/game/render.c \
 		
@@ -64,31 +65,11 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
-
 fclean_nolib:
 	$(RM) objs
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
-#malloc debug flags#
-malloc_debug:: CFLAGS += -D MALLOC_DEBUG
-malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: $(OBJS) objs/debug/malloc_debug.o
-	cc $(CFLAGS) -c src/debug/malloc_debug.c -o objs/debug/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
-
-malloc_debug_sanitize:: CFLAGS += -fsanitize=address
-malloc_debug_sanitize:: LDFLAGS += -fsanitize=address
-malloc_debug_sanitize:: CFLAGS += -D MALLOC_DEBUG
-malloc_debug_sanitize:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
-
-#leaks flags#
-leaks:: CFLAGS += -D LEAKS
-leaks: $(OBJS) objs/debug/malloc_debug.o
-	cc $(CFLAGS) -c src/main.c -o objs/main.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3

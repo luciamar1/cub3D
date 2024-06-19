@@ -7,7 +7,7 @@ char	*ft_strjoin_better(char **s1, char **s2)
 	int		counter;
 
 	counter = 0;
-	if (!*s2 )
+	if (!*s2)
 		return (NULL);
 	if (*s1)
 		l = ft_strlen(*s1) + ft_strlen(*s2);
@@ -39,15 +39,15 @@ int	strlen_bi(char **str)
 	int	counter;
 
 	counter = 0;
-	while(*str)
+	while (*str)
 	{
 		str++;
-		counter ++;
+		counter++;
 	}
-	return(counter);
-};
+	return (counter);
+}
 
-char **strdup_bi(char **str)
+char	**strdup_bi(char **str)
 {
 	char	**ret;
 	int		len_bi;
@@ -55,29 +55,30 @@ char **strdup_bi(char **str)
 
 	counter = 0;
 	len_bi = strlen_bi(str);
-	ret = malloc(sizeof(char *) *  (len_bi + 1));
+	ret = malloc(sizeof(char *) * (len_bi + 1));
 	if (!ret)
-		return(NULL);
-	while(len_bi)
+		return (NULL);
+	while (len_bi)
 	{
 		ret[counter] = ft_strdup(str[counter]);
-		if(!ret[counter])
-			return(free_biarr((void**) ret), NULL);
+		if (!ret[counter])
+			return (free_biarr((void **) ret), NULL);
 		counter ++;
 		len_bi --;
 	}
 	ret[counter] = NULL;
-	return(ret);
+	return (ret);
 }
 
 int	is_digit_space_str(char *str)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
-    while(str[counter] && (is_space(str[counter]) || ft_isdigit(str[counter]) || str[counter] == ',')) 
-		counter ++;
+	while (str[counter] && (is_space(str[counter]) \
+			|| ft_isdigit(str[counter]) || str[counter] == ','))
+		counter++;
 	if (str[counter])
 		return (0);
-    return(1);
+	return (1);
 }

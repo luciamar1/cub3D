@@ -1,10 +1,4 @@
 TODO
 
 - leaks (arreglar movimiento de puntero de los dobles punteros en move to space)
-- colisiones
 - norm
-
-NOTES
-- colors in input little endian (al reves)
-- colors in output big endian
-- ahora mismo, los rayos y el tamaño de la pantalla tienen que coincidir

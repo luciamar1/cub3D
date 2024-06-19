@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		err;
 	t_doc	doc;
@@ -9,14 +9,13 @@ int main(int argc, char **argv)
 	doc = parser(argc, argv, &err);
 	if (err)
 		return (1);
-	printf("mapa bueno\n\n");
-	// doc.map.person.x = 3;
-	// doc.map.person.y = 2;
-	// doc.map.direction.x = -1;
-	// doc.map.direction.y = 2;
-	printf("\n\nmain\nperson %f %f\n", doc.map.person.x, doc.map.person.y);
-    printf("orientation %f %f\n", doc.map.direction.x, doc.map.direction.y);
-	printf("distance %f\n", calc_distance_new(&(doc.map)));
-	//free_biarr(doc.map);
-	return(0);
+	print_biarr(doc.map.bimap);
+	doc.program.image = NULL;
+	doc.program.window = mlx_new_window(doc.program.mlx_ptr, \
+										WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+	mlx_hook(doc.program.window, 17, 0b100, close_win, &doc);
+	mlx_hook(doc.program.window, 2, 0b1, keypress, &doc);
+	render(&doc);
+	mlx_loop(doc.program.mlx_ptr);
+	return (0);
 }
