@@ -1,0 +1,18 @@
+F 0, 0    , 150
+C     150    ,     96,     4
+NO ./xpm/wall_north.xpm
+SO ./xpm/wall_south.xpm
+EA ./xpm/wall_east.xpm
+WE ./xpm/wall_west.xpm
+
+ 111
+1000111111
+10S00000001
+10001111101
+ 111    101
+        101
+        101
+        101
+        1011111111111
+        10000000000001
+        1111111111111

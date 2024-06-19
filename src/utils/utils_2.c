@@ -1,10 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    print_error(char *message)
-{
-    while(*message)
-        write(2, message++, 1);
-}
+#include "cub3d.h"
 
 int	ft_atoi_better(const char *str, int *error)
 {
@@ -33,7 +39,7 @@ int	ft_atoi_better(const char *str, int *error)
 	return (*error = 0, ret);
 }
 
-void	free_biarr(char **fr)
+void	free_biarr(void **fr)
 {
 	int	counter;
 
@@ -49,12 +55,60 @@ void	free_biarr(char **fr)
 	}
 }
 
-void print_biarr(char **str)
+void	free_biarr_int(void **fr, int size)
 {
-	while(*str)
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
-		if(**str)
-			printf("str == %s\n", *str);
-		str++;
+		free(fr[i]);
+		i++;
 	}
+	free(fr);
+}
+
+void	**alloc_biarr(int dim1, int dim2)
+{
+	void	**ret;
+	int		cnt;
+
+	cnt = 0;
+	ret = malloc(dim1 * 8);
+	if (!ret)
+		return (NULL);
+	while (cnt < dim1)
+	{
+		ret[cnt] = malloc(dim2);
+		if (!ret[cnt])
+		{
+			while (cnt > 0)
+				free(ret[--cnt]);
+			free(ret);
+			return (NULL);
+		}
+		cnt++;
+	}
+	return (ret);
+}
+
+char	**level1_copy(char **tocpy)
+{
+	int		size;
+	char	**ret;
+
+	size = 0;
+	while (tocpy[size] != NULL)
+		size++;
+	ret = malloc((size + 1) * 8);
+	if (!ret)
+		return (NULL);
+	size = 0;
+	while (tocpy[size] != NULL)
+	{
+		ret[size] = tocpy[size];
+		size++;
+	}
+	ret[size] = NULL;
+	return (ret);
 }

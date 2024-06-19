@@ -1,43 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int is_space(char character)
+int	is_space(char character)
 {
-    int ret;
+	int	ret;
 
-    ret = 0;
-    if (character == 32 || (character >= 9 && character <= 13))
-        ret = 1;
-    return (ret);
+	ret = 0;
+	if (character == 32 || (character >= 9 && character <= 13))
+		ret = 1;
+	return (ret);
 }
 
-int move_to_space(char **str)
+int	move_to_space(char **str)
 {
-    int ret;
+	int	ret;
 
-    ret = 0;
-    while(*(*str) == 32 || (*(*str) >= 9 && *(*str) <= 13))
-    {
-        ret = 1;
-        (*str) ++;
-    }
-    return (ret);
-}
-
-void    put_value_color(t_colors *colors, int value, char   type)
-{
-    if(type == 'c' || type == 't')
-    {
-        colors->ceiling.r = value;
-        colors->ceiling.g = value;
-        colors->ceiling.b = value;
-    }
-
-    if (type == 'f' || type == 't')
-    {
-        colors->floor.r = value;
-        colors->floor.g = value;
-        colors->floor.b = value;
-    }
+	ret = 0;
+	while (*(*str) == 32 || (*(*str) >= 9 && *(*str) <= 13))
+	{
+		ret = 1;
+		(*str)++;
+	}
+	return (ret);
 }
 
 int	ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n)

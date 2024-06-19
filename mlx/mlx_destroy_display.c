@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_debug.h                                     :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 03:27:04 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/25 17:30:11 by mde-arpe         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_DEBUG_H
-# define MALLOC_DEBUG_H
+#include "mlx_int.h"
 
-# ifndef MALLOC_FAIL
-#  define MALLOC_FAIL 0
-# endif
-
-# include <string.h>
-# include <execinfo.h>
-# include <sys/errno.h>
-# include <string.h>
-
-void	*malloc(size_t n);
-void	leaks(void);
-
-#endif
+int	mlx_destroy_display(t_xvar *xvar)
+{
+	XCloseDisplay(xvar->display);
+}

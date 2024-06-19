@@ -8,25 +8,25 @@ SRCS := src/main/main.c \
 		src/parser/create_map.c \
 		src/parser/check_create_doc.c \
 		src/parser/check_textures.c \
+		src/parser/map_closed.c \
 		src/parser/parser_base.c \
 		src/parser/parser_utils.c \
 		src/parser/str_doc.c \
 		src/utils/utils_1.c \
 		src/utils/utils_2.c \
+		src/raycasting/dda.c \
+		src/raycasting/ddaaux.c \
+		src/game/keypress.c \
+		src/game/render.c \
 		
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
+OBJS += mlx/libmlx_Linux.a
 
-
-# MLX		= mlx/minilibx-linux/Makefile.gen
-# CFLAGS	= -Wall -Wextra -Werror  -I cub3d.h -I libft -Imlx #-g3 -fsanitize=address
-# LIB		= -L ./libft -lft -L ./mlx/minilibx-linux -lmlx -lXext -lX11 -lm #-lbsd
-
-
-CFLAGS	= -Wall -Wextra -Werror -I libft -I src -I mlx 
-LDFLAGS	= -lmlx -framework OpenGL -framework AppKit
+CFLAGS	=  -I libft -I src -I mlx -O1
+LDFLAGS	= -lXext -lX11 -lm -lz -O1
 
 RM = /bin/rm -rf
 
@@ -38,6 +38,8 @@ objs:
 	@mkdir -p	objs/main	\
 				objs/parser	\
 				objs/utils	\
+				objs/raycasting	\
+				objs/game
 
 #compilar src
 objs/%.o: src/%.c | objs
@@ -48,41 +50,27 @@ $(NAME): $(OBJS)
 	cc $(LDFLAGS) $(OBJS) -o $(NAME)
 
 #regla de compilacion libft
-libft/libft.a: 
-	make -C libft
+libft/libft.a:
+	@echo compiling libft...
+	@make -C libft > /dev/null
+
+mlx/libmlx_Linux.a:
+	@echo compiling mlx...
+	@make -C mlx 2> /dev/null > /dev/null
 
 #reglas de limpieza
 clean:
 	$(RM) objs
 	make fclean -C libft
+	make clean -C mlx
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
-
-#malloc debug flags#
 fclean_nolib:
 	$(RM) objs
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
-malloc_debug:: CFLAGS += -D MALLOC_DEBUG
-malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: $(OBJS) objs/debug/malloc_debug.o
-	cc $(CFLAGS) -c src/debug/malloc_debug.c -o objs/debug/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
-
-malloc_debug_sanitize:: CFLAGS += -fsanitize=address
-malloc_debug_sanitize:: LDFLAGS += -fsanitize=address
-malloc_debug_sanitize:: CFLAGS += -D MALLOC_DEBUG
-malloc_debug_sanitize:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
-
-#leaks flags#
-leaks:: CFLAGS += -D LEAKS
-leaks: $(OBJS) objs/debug/malloc_debug.o
-	cc $(CFLAGS) -c src/main.c -o objs/main.o
-	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3
