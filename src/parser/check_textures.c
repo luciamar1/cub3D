@@ -38,7 +38,7 @@ static int	**create_texture(char *data)
 }
 
 //return the textures as a matrix BY COLUMNS
-//(convinient, bc we will paint by columns)
+//(convenient, bc we will paint by columns)
 int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
 	void	*img;
@@ -66,42 +66,34 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 	return (ret);
 }
 
-int clasificate_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
+int	clasificate_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
 	if (!ft_strncmp(str_doc, "NO ", 3) && !textures[2])
-	{
-		doc->textures.no = check_textures(str_doc, err_doc, doc, &textures[2]);
-		return (1);
-	}
+		return (doc->textures.no = check_textures(str_doc, \
+									err_doc, doc, &textures[2]), 1);
 	else
 		*err_doc += 1;
 	if (!ft_strncmp(str_doc, "SO ", 3) && !textures[3])
-	{
-		doc->textures.so = check_textures(str_doc, err_doc, doc, &textures[3]);
-		return (1);
-	}
+		return (doc->textures.so = check_textures(str_doc, \
+									err_doc, doc, &textures[3]), 1);
 	else
 		*err_doc += 1;
 	if (!ft_strncmp(str_doc, "WE ", 3) && !textures[4])
-	{
-		doc->textures.we = check_textures(str_doc, err_doc, doc, &textures[4]);
-		return (1);
-	}
+		return (doc->textures.we = check_textures(str_doc, \
+									err_doc, doc, &textures[4]), 1);
 	else
 		*err_doc += 1;
 	if (!ft_strncmp(str_doc, "EA ", 3) && !textures[5])
-	{
-		doc->textures.ea = check_textures(str_doc, err_doc, doc, &textures[5]);
-		return (1);
-	}
+		return (doc->textures.ea = check_textures(str_doc, \
+									err_doc, doc, &textures[5]), 1);
 	else
 		*err_doc += 1;
 	return (0);
 }
 
-int try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
+int	try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 {
-	int ret;
+	int	ret;
 
 	move_to_space(&str_doc);
 	ret = clasificate_textures(str_doc, err_doc, doc, textures);

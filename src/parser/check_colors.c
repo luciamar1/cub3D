@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	check_volume_nums(char *str)
@@ -8,10 +20,9 @@ int	check_volume_nums(char *str)
 	while (counter++ < 2)
 	{
 		move_to_space(&str);
-		if (ft_isdigit(*str)) {
+		if (ft_isdigit(*str))
 			while (ft_isdigit(*str))
-				str ++;
-		}
+				str++;
 		else
 			return (0);
 		move_to_space(&str);
@@ -25,7 +36,7 @@ int	check_volume_nums(char *str)
 		while (ft_isdigit(*str))
 			str ++;
 	else
-		return 0;
+		return (0);
 	move_to_space(&str);
 	return (*str == 0);
 }
@@ -58,33 +69,38 @@ int	put_rgb(char **nums, int *doc_rgb, int *color)
 
 void	check_rgb(char *str, int *err_doc, int *doc_rgb, int *colors)
 {
-	char **nums;
+	char	**nums;
+	char	**numscpy;
 
 	move_to_space(&str);
 	if (!is_digit_space_str(str) || !check_volume_nums(str))
-	{
-		*err_doc = -1;
-		return ;
-	}
+		return (*err_doc = -1, (void) 42);
 	nums = ft_split(str, ',');
 	if (!nums)
+		return (*err_doc = -1, (void) 42);
+	numscpy = level1_copy(nums);
+	if (!numscpy)
 	{
 		*err_doc = -1;
+		free_biarr((void **) nums);
 		return ;
 	}
 	if (!put_rgb(nums, doc_rgb, colors))
 		*err_doc = -1;
-	//free_biarr((void **) nums);
+	free_biarr((void **) numscpy);
+	free(nums);
 }
 
 int	try_colors(char *str_doc, int *err_doc, t_doc *doc, int *colors)
 {
 	if (!ft_strncmp(str_doc, "C ", 2) && !colors[0])
-	   return ((check_rgb(str_doc + 1, err_doc, &(doc->colors.ceiling), &colors[0])), 1);
+		return ((check_rgb(str_doc + 1, err_doc, \
+					&(doc->colors.ceiling), &colors[0])), 1);
 	else
 		*err_doc += 1;
 	if (!ft_strncmp(str_doc, "F ", 2) && !colors[1])
-	   return ((check_rgb(str_doc + 1, err_doc, &(doc->colors.floor), &colors[1])), 1);
+		return ((check_rgb(str_doc + 1, err_doc, \
+					&(doc->colors.floor), &colors[1])), 1);
 	else
 		*err_doc += 1;
 	return (0);

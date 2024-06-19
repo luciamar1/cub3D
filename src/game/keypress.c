@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	close_win(t_doc *doc)
@@ -47,7 +59,6 @@ void	move(float x, float y, t_fvector *person, t_map map)
 		person->x = moved_to.x;
 		person->y = moved_to.y;
 	}
-	printf("position: %.10f, %.10f\n", person->x, person->y);
 }
 
 int	keypress(int keycode, t_doc *doc)
@@ -71,7 +82,6 @@ int	keypress(int keycode, t_doc *doc)
 		if (keycode == LEFT)
 			doc->map.angle = add_angle(doc->map.angle, ROTATE);
 		doc->map.direction = angle_to_direction(doc->map.angle);
-		printf("angle: %.10f, dir: %.10f, %.10f\n", doc->map.angle, doc->map.direction.x, doc->map.direction.y);
 	}
 	else if (keycode == ESC)
 		close_win(doc);

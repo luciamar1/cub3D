@@ -15,7 +15,7 @@
 
 # include "../parser/parser.h"
 
-# define MOVE 0.25  // cuadrados por pulsacion
+# define MOVE 0.4	// cuadrados por pulsacion
 # define ROTATE 5   // grados por pulsacion
 # define VISION 110 // grados de vision
 

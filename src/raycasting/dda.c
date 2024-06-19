@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static float	v_distance(t_fvector v1, t_fvector v2)
+float	v_distance(t_fvector v1, t_fvector v2)
 {
 	t_fvector	subs;
 	float		prode;
@@ -11,7 +23,7 @@ static float	v_distance(t_fvector v1, t_fvector v2)
 	return (sqrt(prode));
 }
 
-float	ray(t_map map, t_fvector *collision, t_fvector direction)
+void	ray(t_map map, t_fvector *collision, t_fvector direction)
 {
 	int	found;
 
@@ -23,7 +35,6 @@ float	ray(t_map map, t_fvector *collision, t_fvector direction)
 		*collision = next_check(*collision, direction);
 		found = is_wall(*collision, direction, map.bimap);
 	}
-	return (v_distance(map.person, *collision));
 }
 
 //return false if cant move

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int is_space(char character)
+int	is_space(char character)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (character == 32 || (character >= 9 && character <= 13))
@@ -10,15 +22,15 @@ int is_space(char character)
 	return (ret);
 }
 
-int move_to_space(char **str)
+int	move_to_space(char **str)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (*(*str) == 32 || (*(*str) >= 9 && *(*str) <= 13))
 	{
 		ret = 1;
-		(*str) ++;
+		(*str)++;
 	}
 	return (ret);
 }

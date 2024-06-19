@@ -12,36 +12,60 @@
 
 #include "cub3d.h"
 
-int	check_extension(char *document)
+int	is_orientation(char orientation)
 {
-	if (ft_str_rev_n_cmp(document, ".cub", 4))
-		return (0);
-	return (1);
+	if (orientation == 'N' || orientation == 'S' \
+		|| orientation == 'E' || orientation == 'W')
+		return (1);
+	return (0);
 }
 
-t_doc	parser(int argc, char **argv, int *err_parser)
+int	recursive_function(char **map, size_t x, size_t y)
 {
-	char	**strbi_doc;
-	t_doc	doc;
-	int		err;
-
-	err = 0;
-	ft_bzero(&doc, sizeof(t_doc));
-	if (argc != 2)
+	if (!map[x] || ft_strlen(map[x]) <= y)
+		return (0);
+	if (map[x][y] == 'C')
+		return (1);
+	if (map[x][y] == '1')
 	{
-		print_error("incorrect number of arguments\n");
-		return ((*err_parser = 1), doc);
+		map[x][y] = 'C';
+		return (1);
 	}
-	if (!check_extension(argv[1]))
-		return ((print_error("incorrect extension\n")), (*err_parser = 1), doc);
-	strbi_doc = read_document(argv[1]);
-	if (!strbi_doc)
-		return ((print_error("doc cant be read\n")), (*err_parser = 1), doc);
-	doc = check_create_document(strbi_doc, &err);
-	free_biarr((void **) strbi_doc);
-	if (err)
-		return ((*err_parser = 1), doc);
-	if (!check_map(&doc))
-		return ((print_error("map error\n")), (*err_parser = 1), doc);
-	return ((*err_parser = 0), doc);
+	if (map[x][y] == '0')
+	{
+		map[x][y] = 'C';
+		return (recursive_function(map, x - 1, y) \
+				&& recursive_function(map, x, y - 1) \
+				&& recursive_function(map, x + 1, y) \
+				&& recursive_function(map, x, y + 1));
+	}
+	return (0);
+}
+
+int	verify_if_close(char **str)
+{
+	int	x;
+	int	y;
+	int	br;
+
+	x = 0;
+	y = 0;
+	br = 0;
+	while (str[x])
+	{
+		while (str[x][y])
+		{
+			if (is_orientation(str[x][y]))
+				br = 1;
+			if (br)
+				break ;
+			y++;
+		}
+		if (br)
+			break ;
+		y = 0;
+		x ++;
+	}
+	str[x][y] = '0';
+	return (recursive_function(str, x, y));
 }

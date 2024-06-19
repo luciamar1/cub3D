@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -18,6 +30,7 @@ typedef struct s_minilib
 	void	*mlx_ptr;
 	void	*window;
 	void	*image;
+	void	*next_image;
 }	t_minilib;
 
 typedef struct s_textures
@@ -53,5 +66,7 @@ char	**read_document(char *extension);
 int		try_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures);
 char	**create_real_map(char **check, char **map);
 int		ft_str_rev_n_cmp(const char *s1, const char *s2, size_t n);
+int		verify_if_close(char **str);
+int		is_orientation(char orientation);
 
 #endif

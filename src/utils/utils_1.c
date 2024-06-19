@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
+/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 char	*ft_strjoin_better(char **s1, char **s2)
@@ -23,15 +35,6 @@ char	*ft_strjoin_better(char **s1, char **s2)
 		*s++ = s2[0][counter++];
 	*s = '\0';
 	return (s - l);
-}
-
-void	print_doc(t_doc doc)
-{
-	printf("\n\nDOC:\n\n");
-	printf("   color ceiling == %d, %d , %d\n", (unsigned char) (doc.colors.ceiling >> 16), (unsigned char) (doc.colors.ceiling >> 8), (unsigned char) (doc.colors.ceiling));
-	printf("   color floor == %d, %d , %d\n\n", (unsigned char) (doc.colors.floor >> 16), (unsigned char) (doc.colors.floor >> 8), (unsigned char) (doc.colors.floor));
-	printf("\n\nMAP\n");
-	print_biarr(doc.map.bimap);
 }
 
 int	strlen_bi(char **str)
@@ -81,4 +84,10 @@ int	is_digit_space_str(char *str)
 	if (str[counter])
 		return (0);
 	return (1);
+}
+
+void	print_error(char *message)
+{
+	while (*message)
+		write(2, message++, 1);
 }

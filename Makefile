@@ -8,6 +8,7 @@ SRCS := src/main/main.c \
 		src/parser/create_map.c \
 		src/parser/check_create_doc.c \
 		src/parser/check_textures.c \
+		src/parser/map_closed.c \
 		src/parser/parser_base.c \
 		src/parser/parser_utils.c \
 		src/parser/str_doc.c \
@@ -24,8 +25,8 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 OBJS += mlx/libmlx_Linux.a
 
-CFLAGS	=  -I libft -I src -I mlx
-LDFLAGS	= -lXext -lX11 -lm -lz
+CFLAGS	=  -I libft -I src -I mlx -O1
+LDFLAGS	= -lXext -lX11 -lm -lz -O1
 
 RM = /bin/rm -rf
 
