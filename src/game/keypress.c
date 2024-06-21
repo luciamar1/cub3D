@@ -18,6 +18,8 @@ int	close_win(t_doc *doc)
 		mlx_destroy_image(doc->program.mlx_ptr, doc->program.image);
 	mlx_clear_window(doc->program.mlx_ptr, doc->program.window);
 	mlx_destroy_window(doc->program.mlx_ptr, doc->program.window);
+	mlx_destroy_display(doc->program.mlx_ptr);
+	free(doc->program.mlx_ptr);
 	free_biarr_int((void **) doc->textures.so, IMAGESIZE);
 	free_biarr_int((void **) doc->textures.ea, IMAGESIZE);
 	free_biarr_int((void **) doc->textures.no, IMAGESIZE);
