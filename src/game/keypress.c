@@ -47,7 +47,7 @@ t_fvector	angle_to_direction(float angle)
 	return (v);
 }
 
-void	move(float x, float y, t_fvector *person, t_map map)
+void	move(float x, float y, t_fvector *person, t_doc *doc)
 {
 	t_fvector	moved_to;
 	t_fvector	direction;
@@ -56,10 +56,11 @@ void	move(float x, float y, t_fvector *person, t_map map)
 	moved_to.y = person->y + y * (float) MOVE;
 	direction.x = x;
 	direction.y = y;
-	if (raymove(map, direction, moved_to))
+	if (raymove(doc->map, direction, moved_to))
 	{
 		person->x = moved_to.x;
 		person->y = moved_to.y;
+		render(doc);
 	}
 }
 
@@ -67,16 +68,16 @@ int	keypress(int keycode, t_doc *doc)
 {
 	if (keycode == W)
 		move(doc->map.direction.x, doc->map.direction.y, \
-			&(doc->map.person), doc->map);
+			&(doc->map.person), doc);
 	else if (keycode == A)
 		move(-1 * doc->map.direction.y, doc->map.direction.x, \
-			&(doc->map.person), doc->map);
+			&(doc->map.person), doc);
 	else if (keycode == S)
 		move(-1 * doc->map.direction.x, -1 * doc->map.direction.y, \
-			&(doc->map.person), doc->map);
+			&(doc->map.person), doc);
 	else if (keycode == D)
 		move(doc->map.direction.y, -1 * doc->map.direction.x, \
-			&(doc->map.person), doc->map);
+			&(doc->map.person), doc);
 	else if (keycode == RIGHT || keycode == LEFT)
 	{
 		if (keycode == RIGHT)
@@ -84,9 +85,9 @@ int	keypress(int keycode, t_doc *doc)
 		if (keycode == LEFT)
 			doc->map.angle = add_angle(doc->map.angle, ROTATE);
 		doc->map.direction = angle_to_direction(doc->map.angle);
+		render(doc);
 	}
 	else if (keycode == ESC)
 		close_win(doc);
-	render(doc);
 	return (0);
 }

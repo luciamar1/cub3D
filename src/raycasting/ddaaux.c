@@ -31,7 +31,7 @@ static int	is_wall_mid(t_fvector collision, t_fvector direction, char **bimap)
 		return ((bimap[(int) collision.x - 1][to_check.y] == '1') \
 			|| (bimap[(int) collision.x][to_check.y] == '1'));
 	}
-	else
+	else if (is_zero(direction.y))
 	{
 		if (direction.x > 0)
 			to_check.x = collision.x;
@@ -40,14 +40,18 @@ static int	is_wall_mid(t_fvector collision, t_fvector direction, char **bimap)
 		return ((bimap[to_check.x][(int) collision.y - 1] == '1') \
 			|| (bimap[to_check.x][(int) collision.y] == '1'));
 	}
+	else if (direction.x * direction.y > 0)
+		return ((bimap[(int) collision.x][(int) collision.y - 1] == '1') \
+			|| (bimap[(int) collision.x - 1][(int) collision.y] == '1'));
+	return ((bimap[(int) collision.x][(int) collision.y] == '1') \
+		|| (bimap[(int) collision.x - 1][(int) collision.y - 1] == '1'));
 }
 
 int	is_wall(t_fvector collision, t_fvector direction, char **bimap)
 {
 	t_vector	to_check;
 
-	if (collision.x == (int) collision.x && collision.y == (int) collision.y \
-		&& (is_zero(direction.x) || is_zero(direction.y)))
+	if (collision.x == (int) collision.x && collision.y == (int) collision.y)
 		return (is_wall_mid(collision, direction, bimap));
 	if (collision.x == (int) collision.x)
 	{
