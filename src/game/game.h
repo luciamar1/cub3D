@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:40:56 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/23 19:38:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:43:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../parser/parser.h"
 
-# define MOVE 0.25	// cuadrados por pulsacion
+# define MOVE 0.4	// cuadrados por pulsacion
 # define ROTATE 5   // grados por pulsacion
 # define VISION 110 // grados de vision
 
