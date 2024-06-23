@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:45:29 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	main(int argc, char **argv)
 	err = 0;
 	doc = parser(argc, argv, &err);
 	if (err)
+	{
+		free_doc(doc);
 		return (1);
+	}
 	doc.program.image = NULL;
 	doc.program.window = mlx_new_window(doc.program.mlx_ptr, \
 										WIN_W, WIN_H, "cub3d");

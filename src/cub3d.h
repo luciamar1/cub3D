@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:53:33 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "game/game.h"
 # include <limits.h>
 
-# define WIN_H	800   //window height
-# define WIN_W	1200  //window width
+# define WIN_H	1500   //window height
+# define WIN_W	2000  //window width
 
 #endif

@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   str_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:52:10 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_doc(t_doc doc)
+{
+	if (doc.program.mlx_ptr)
+	{
+		mlx_destroy_display(doc.program.mlx_ptr);
+		free(doc.program.mlx_ptr);
+	}
+	free_biarr_int((void **) doc.textures.so, IMAGESIZE);
+	free_biarr_int((void **) doc.textures.ea, IMAGESIZE);
+	free_biarr_int((void **) doc.textures.no, IMAGESIZE);
+	free_biarr_int((void **) doc.textures.we, IMAGESIZE);
+	free_biarr((void **) doc.map.bimap);
+}
 
 char	**read_document(char *extension)
 {

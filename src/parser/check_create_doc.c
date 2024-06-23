@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   check_create_doc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:56:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_doc	check_create_document(char **str_doc, int *err)
 	int		text;
 	int		creat[6];
 
-	doc.map.bimap = ((ft_bzero(creat, sizeof(int) * 6)), NULL);
-	doc.program.mlx_ptr = ((colors = 0), (text = 0), mlx_init());
+	colors = (ft_bzero(&doc, sizeof(t_doc)), ft_bzero(creat, 24), 0);
+	doc.program.mlx_ptr = ((text = 0), mlx_init());
 	if (!doc.program.mlx_ptr)
 		return (print_error("mlx_init fail\n"), (*err = 1), doc);
 	while (*str_doc)

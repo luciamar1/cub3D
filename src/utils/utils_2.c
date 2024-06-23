@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/05 01:40:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:36:19 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ void	free_biarr_int(void **fr, int size)
 	int	i;
 
 	i = 0;
-	while (i < size)
+	if (fr)
 	{
-		free(fr[i]);
-		i++;
+		while (i < size)
+		{
+			free(fr[i]);
+			i++;
+		}
+		free(fr);
 	}
-	free(fr);
 }
 
 void	**alloc_biarr(int dim1, int dim2)
