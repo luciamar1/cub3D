@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:59:42 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/04 20:02:33 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:02:27 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 	move_to_space(&str_doc);
 	img = mlx_xpm_file_to_image(doc->program.mlx_ptr, str_doc, &wid, &hei);
 	if (!img || wid != IMAGESIZE || hei != IMAGESIZE)
-		return ((*err_doc = -1), NULL);
+		return ((*err_doc = -1), \
+				mlx_destroy_image(doc->program.mlx_ptr, img), NULL);
 	data = mlx_get_data_addr(img, &wid, &wid, &wid);
 	if (!data)
 	{

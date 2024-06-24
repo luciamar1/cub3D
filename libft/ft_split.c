@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:53:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/10 18:06:37 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:01:26 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	len_till_next__word(char const *s, char c)
 
 	counter = 0;
 	while (*s && *s != c)
-	{	
+	{
 		counter++;
 		s++;
 	}
