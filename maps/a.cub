@@ -1,6 +1,6 @@
 F 0, 0    , 150
 C     150    ,     96,     4
-NO ./xpm/wall_north.xpm
+NO ./xpm/sue.xpm
 SO ./xpm/wall_south.xpm
 EA ./xpm/wall_east.xpm
 WE ./xpm/wall_west.xpm

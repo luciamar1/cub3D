@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:59:42 by mde-arpe          #+#    #+#             */
-/*   Updated: 2024/06/24 20:02:27 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:13:18 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 	str_doc += 2;
 	move_to_space(&str_doc);
 	img = mlx_xpm_file_to_image(doc->program.mlx_ptr, str_doc, &wid, &hei);
-	if (!img || wid != IMAGESIZE || hei != IMAGESIZE)
+	if (!img)
+		return ((*err_doc = -1), NULL);
+	if (wid != IMAGESIZE || hei != IMAGESIZE)
 		return ((*err_doc = -1), \
 				mlx_destroy_image(doc->program.mlx_ptr, img), NULL);
 	data = mlx_get_data_addr(img, &wid, &wid, &wid);
@@ -63,8 +65,7 @@ int	**check_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
 	mlx_destroy_image(doc->program.mlx_ptr, img);
 	if (!ret)
 		return ((*err_doc = -1), NULL);
-	*textures = 1;
-	return (ret);
+	return (*textures = 1, ret);
 }
 
 int	clasificate_textures(char *str_doc, int *err_doc, t_doc *doc, int *textures)
