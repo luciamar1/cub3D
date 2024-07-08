@@ -25,8 +25,8 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 OBJS += mlx/libmlx_Linux.a
 
-CFLAGS	=  -I libft -I src -I mlx -O1
-LDFLAGS	= -lXext -lX11 -lm -lz -O1
+CFLAGS	=  -Wall -Wextra -Werror -I libft -I src -I mlx -O1
+LDFLAGS	=  -Wall -Wextra -Werror -lXext -lX11 -lm -lz -O1
 
 RM = /bin/rm -rf
 
